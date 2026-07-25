@@ -41,6 +41,36 @@ export function RefPhoto({
   );
 }
 
+/**
+ * Reference crops that hold nothing but painted art.
+ *
+ * Only these may be framed on a gameplay screen. The v0.8 coordinate table was
+ * written against the wrong resolution, so a number of regions land on the
+ * sheet's own interface: `ref.tape` carries the letters `PE`/`EY`, `ref.boxshell`
+ * says `BOX`, `ref.ghost` says `GHOST`, `ref.eye` says `ICKER`, `ref.holdcard`
+ * shows a cursor and `TO PRESS`, and `ref.stage` is an entire v0.8 screenshot
+ * down to its `STAGE 4` header and action bar.
+ *
+ * Framing those would repeat the exact defect the audit charged v0.8 with —
+ * pasting old interface chrome into the game as if it were art. They stay in the
+ * catalog, where `/dev/assets` shows them beside the sprite they inform, because
+ * that is a developer view and the contamination is the point there.
+ *
+ * `refPhotos.test.ts` holds this list against the two maps below.
+ */
+export const CLEAN_REF_PHOTOS: readonly string[] = [
+  'ref.hero_card',
+  'ref.enemy_rat',
+  'ref.enemy_spider',
+  'ref.enemy_crow',
+  'ref.toast',
+  'ref.scissors',
+  'ref.umbrella',
+  'ref.coffee',
+  'ref.bomb',
+  'ref.spear',
+];
+
 /** Enemy id → the reference crop of that creature, for battle portraits. */
 export const ENEMY_REF: Record<string, string> = {
   pencil_rat: 'ref.enemy_rat',
@@ -48,12 +78,12 @@ export const ENEMY_REF: Record<string, string> = {
   scissor_crow: 'ref.enemy_crow',
 };
 
-/** Event id → a reference crop that suits it. */
+/** Event id → a reference crop that suits it. Clean crops only. */
 export const EVENT_REF: Record<string, string> = {
-  gluePool: 'ref.tape',
-  pencilMarks: 'ref.pencilcup',
-  clipDrawer: 'ref.boxshell',
-  inkSpill: 'ref.stage',
+  gluePool: 'ref.coffee',
+  pencilMarks: 'ref.spear',
+  clipDrawer: 'ref.scissors',
+  inkSpill: 'ref.umbrella',
   nestNoise: 'ref.enemy_spider',
   breadCrumbs: 'ref.toast',
 };

@@ -10,8 +10,9 @@
       "file": "references/stage_bg_base.png",
       "declared": "1152x1180",
       "extracted": "576x590",
-      "meanLuma": 139,
-      "darkRatio": 0.183,
+      "trimmedTo": "471x590",
+      "meanLuma": 169.9,
+      "darkRatio": 0,
       "verdict": "ok"
     },
     "hero_full": {
@@ -26,9 +27,10 @@
       "file": "references/prop_tornpaper_right.png",
       "declared": "254x566",
       "extracted": "127x283",
-      "meanLuma": 37.7,
-      "darkRatio": 0.701,
-      "verdict": "partial"
+      "trimmedTo": "38x283",
+      "meanLuma": 125,
+      "darkRatio": 0,
+      "verdict": "ok"
     },
     "part_umbrella": {
       "file": "references/part_umbrella.png",
@@ -50,8 +52,9 @@
       "file": "references/prop_hold_card.png",
       "declared": "380x510",
       "extracted": "190x255",
-      "meanLuma": 158.9,
-      "darkRatio": 0.15,
+      "trimmedTo": "190x217",
+      "meanLuma": 186.6,
+      "darkRatio": 0.001,
       "verdict": "ok"
     },
     "part_scissors": {
@@ -66,32 +69,36 @@
       "file": "references/enemy_pencil_rat.png",
       "declared": "350x460",
       "extracted": "175x230",
-      "meanLuma": 121.4,
-      "darkRatio": 0.112,
+      "trimmedTo": "156x230",
+      "meanLuma": 136.1,
+      "darkRatio": 0.003,
       "verdict": "ok"
     },
     "enemy_tape_spider": {
       "file": "references/enemy_tape_spider.png",
       "declared": "415x445",
       "extracted": "208x223",
-      "meanLuma": 112.1,
-      "darkRatio": 0.226,
+      "trimmedTo": "161x223",
+      "meanLuma": 144.7,
+      "darkRatio": 0,
       "verdict": "ok"
     },
     "prop_pencilcup_left": {
       "file": "references/prop_pencilcup_left.png",
       "declared": "125x410",
       "extracted": "63x205",
-      "meanLuma": 140.9,
-      "darkRatio": 0.015,
+      "trimmedTo": "62x205",
+      "meanLuma": 143,
+      "darkRatio": 0,
       "verdict": "ok"
     },
     "enemy_scissor_crow": {
       "file": "references/enemy_scissor_crow.png",
       "declared": "377x380",
       "extracted": "189x190",
-      "meanLuma": 91.7,
-      "darkRatio": 0.242,
+      "trimmedTo": "144x190",
+      "meanLuma": 120.3,
+      "darkRatio": 0.005,
       "verdict": "ok"
     },
     "icon_bomb": {

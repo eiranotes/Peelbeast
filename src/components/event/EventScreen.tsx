@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useGame } from '@/app/gameStore';
 import { EVENTS } from '@/game/data/events';
 import { RELICS } from '@/game/data/relics';
+import { ENCOUNTERS } from '@/game/data/enemies';
 import { currentNode, eventOptionAvailable } from '@/game/engine/rewardResolver';
 import { STATUSES } from '@/game/data/statuses';
 import type { RunEffect } from '@/game/data/types';
@@ -51,7 +52,7 @@ export function EventScreen() {
                   data-testid={`event-option-${opt.id}`}
                 >
                   <strong>{opt.title}</strong>
-                  <span>{opt.desc}</span>
+                  {opt.desc && <span>{opt.desc}</span>}
                   <em className="event-option__effects">{opt.effects.map(effectLabel).join(' · ')}</em>
                   {!available && <em className="event-option__blocked">조건 미충족</em>}
                 </button>
@@ -106,6 +107,6 @@ export function effectLabel(e: RunEffect): string {
     case 'shopDiscount':
       return `상점 ${e.amount} 할인`;
     case 'forceEncounter':
-      return '즉시 전투';
+      return `즉시 ${ENCOUNTERS[e.encounterId]?.name ?? '전투'} 전투`;
   }
 }

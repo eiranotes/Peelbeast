@@ -41,7 +41,6 @@ export const SHOPS: Record<string, ShopDef> = {
         ref: 'repair',
         cost: 7,
         name: 'Repair Service',
-        desc: 'HP +10, Glue +10, 벗겨진 파츠 전부 정비',
         effects: [{ kind: 'hp', amount: 10 }, { kind: 'glue', amount: 10 }, { kind: 'repairAllParts' }],
       },
       {
@@ -50,7 +49,6 @@ export const SHOPS: Record<string, ShopDef> = {
         ref: 'bundle',
         cost: 6,
         name: 'Supply Bundle',
-        desc: '다음 전투 시작 Block 6, Glue +5',
         effects: [{ kind: 'startBlock', amount: 6 }, { kind: 'glue', amount: 5 }],
       },
       {
@@ -59,7 +57,6 @@ export const SHOPS: Record<string, ShopDef> = {
         ref: 'focus',
         cost: 5,
         name: 'Sharpening Kit',
-        desc: '다음 전투를 Focus 2로 시작',
         effects: [{ kind: 'startStatus', status: 'focus', amount: 2 }],
       },
     ],

@@ -46,6 +46,11 @@
   --radius: 14px;
   --tape: #efe2c0;
 
+  /* Height the shell spends before a screen gets any: the nav bar plus the
+     bottom padding of the main column. Screens that bound themselves to the
+     viewport subtract this instead of guessing. */
+  --app-chrome: 74px;
+
   color-scheme: light;
 }
 

@@ -323,8 +323,37 @@ export function applyBattleResult(
   };
 }
 
+/**
+ * Record the node being left if nothing else did.
+ *
+ * Combat and events write their own entry at the moment they resolve, because
+ * they have an outcome to report. A shop has no outcome, so it was writing
+ * nothing at all — and the result screen counted "7/7 nodes" while listing six.
+ * Recording it here covers the shop and any future node type that just passes
+ * through, rather than treating the shop as a special case.
+ */
+function recordDepartedNode(run: RunState): void {
+  const node = currentNode(run);
+  if (!node) return;
+  if (run.history.some((h) => h.index === run.nodeIndex)) return;
+
+  const bought = run.shopPurchased
+    .map((id) => SHOPS[node.shopId ?? '']?.pool.find((i) => i.id === id))
+    .filter((i): i is ShopItemDef => !!i)
+    .map((i) => describeShopItem(i).name);
+
+  run.history.push({
+    index: run.nodeIndex,
+    type: node.type,
+    label: node.label,
+    outcome: 'resolved',
+    detail: bought.length ? `구매: ${bought.join(', ')}` : '둘러보기만 했다',
+  });
+}
+
 export function advanceNode(run: RunState): RunState {
   const next = clone(run);
+  recordDepartedNode(next);
   if (isFinalNode(next)) {
     next.status = 'won';
     return next;

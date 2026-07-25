@@ -56,27 +56,32 @@ function BattleView() {
   const stageRef = useRef<HTMLDivElement>(null);
   const [figureWidth, setFigureWidth] = useState(300);
 
+  const b = battle!;
+  // The strip along the bottom is only reserved once something is lying in it.
+  const floorReserve = b.player.floor.length > 0 ? 74 : 30;
+
   /**
    * Size the beast from the stage rather than a fixed pixel width. The stage
-   * itself flexes with viewport height, so at 1280x720 the character shrinks
-   * instead of being clipped by the stage's overflow.
+   * flexes with viewport height, so on a short window the character shrinks
+   * instead of being clipped by the stage's overflow — the lower bound has to
+   * stay below what the stage can actually hold, or the floor reintroduces the
+   * clipping it exists to prevent.
    */
   useLayoutEffect(() => {
     const el = stageRef.current;
     if (!el) return;
     const measure = () => {
-      const usable = el.clientHeight - 74; // floor strip + breathing room
+      const usable = el.clientHeight - floorReserve;
       const byHeight = usable / (940 / 800); // body aspect ratio
       const byWidth = el.clientWidth * 0.3;
-      setFigureWidth(Math.max(170, Math.min(300, byHeight, byWidth)));
+      setFigureWidth(Math.max(120, Math.min(300, byHeight, byWidth)));
     };
     measure();
     const ro = new ResizeObserver(measure);
     ro.observe(el);
     return () => ro.disconnect();
-  }, []);
+  }, [floorReserve]);
 
-  const b = battle!;
   const encounter = ENCOUNTERS[b.encounterId];
   const peeled = useMemo(() => battlePeeledSet(b), [b]);
   const revealed = useMemo(() => intentsRevealed(b), [b]);

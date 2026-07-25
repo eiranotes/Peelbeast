@@ -361,6 +361,54 @@ test.describe('PEELBEAST vertical slice', () => {
   });
 });
 
+/**
+ * The action bar is the only thing the player must reach every single turn, so
+ * "did it fall below the fold" is a correctness question, not a taste one. It
+ * regressed once already — at 1280x720 the whole right column moved under the
+ * buttons and the buttons themselves went off-screen — so the fold is asserted
+ * at the sizes people actually have, including mid-fight when the intent cards
+ * grow peel badges and get taller.
+ */
+test.describe('battle fits the viewport', () => {
+  for (const [width, height] of [
+    [1440, 900],
+    [1366, 768],
+    [1280, 720],
+  ] as const) {
+    test(`${width}x${height}: actions, intents and part integrity are all on screen`, async ({
+      page,
+    }) => {
+      await page.setViewportSize({ width, height });
+      await startRun(page);
+      await makePeelable(page);
+      await page.getByTestId('enter-node').click();
+      await expect(page.getByTestId('battle-screen')).toBeVisible();
+
+      const fitsOnScreen = async (testId: string) => {
+        const box = await page.getByTestId(testId).boundingBox();
+        expect(box, testId).not.toBeNull();
+        return box!.y >= 0 && box!.y + box!.height <= height + 1;
+      };
+
+      expect(await fitsOnScreen('action-bar'), 'action bar at turn 1').toBe(true);
+      expect(await fitsOnScreen('peel-status'), 'part integrity at turn 1').toBe(true);
+
+      // and the page itself does not scroll to achieve that
+      const scrolls = await page.evaluate(
+        () => document.documentElement.scrollHeight > window.innerHeight + 1,
+      );
+      expect(scrolls, 'page scrolls at turn 1').toBe(false);
+
+      // mid-fight the intent cards carry extra badges; the stage gives way, the
+      // buttons do not
+      await stallUntilPeel(page, 12);
+      if (await page.getByTestId('action-bar').isVisible().catch(() => false)) {
+        expect(await fitsOnScreen('action-bar'), 'action bar mid-fight').toBe(true);
+      }
+    });
+  }
+});
+
 test.describe('developer screens', () => {
   test('the asset catalog lists assets with no validation errors', async ({ page }) => {
     await page.goto('/#/dev/assets');

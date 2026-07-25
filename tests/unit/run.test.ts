@@ -8,6 +8,7 @@ import {
   createRun,
   currentEncounter,
   currentNode,
+  describeShopItem,
   eventOptionAvailable,
   equipPart,
   isFinalNode,
@@ -241,6 +242,44 @@ describe('battle results and progression', () => {
     expect(isFinalNode(run)).toBe(true);
     run = advanceNode(run);
     expect(run.status).toBe('won');
+  });
+
+  it('records every node it walks past, so the result screen adds up', () => {
+    let run = createRun('snip', 1);
+    const total = ROUTES.snip.nodes.length;
+    for (let i = 0; i < total; i++) run = advanceNode(run);
+
+    // one entry per node, and no index recorded twice
+    const indices = run.history.map((h) => h.index);
+    expect(indices).toHaveLength(total);
+    expect(new Set(indices).size).toBe(total);
+  });
+
+  it('names what was bought when it records a shop node', () => {
+    let run = createRun('snip', 1);
+    const shopAt = ROUTES.snip.nodes.findIndex((n) => n.type === 'shop');
+    expect(shopAt).toBeGreaterThan(-1);
+    while (run.nodeIndex < shopAt) run = advanceNode(run);
+
+    run = rollShop(run, currentNode(run)!.shopId!);
+    const item = shopOfferItems(run, 'bench')[0]!;
+    run.scrap = 999;
+    run = purchase(run, 'bench', item.id);
+    run = advanceNode(run);
+
+    const record = run.history.at(-1)!;
+    expect(record.type).toBe('shop');
+    expect(record.detail).toContain(describeShopItem(item).name);
+  });
+
+  it('does not overwrite a record the node already wrote for itself', () => {
+    let run = createRun('snip', 1);
+    run = chooseEventOption(advanceNode(run), 'gluePool', 'scoop');
+    const afterEvent = run.history.length;
+
+    run = advanceNode(run);
+    expect(run.history).toHaveLength(afterEvent);
+    expect(run.history.at(-1)?.detail).not.toContain('둘러보기만');
   });
 
   it('advancing clears the shop roll so the next visit re-rolls', () => {

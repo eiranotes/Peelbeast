@@ -278,7 +278,13 @@ export type RunEffect =
 export interface EventOptionDef {
   id: string;
   title: string;
-  desc: string;
+  /**
+   * Flavour only, and optional. The numbers come from `effects` via
+   * `effectLabel`, so an option must never restate them here — that is two
+   * sources for one fact, which is how v0.8's intent text drifted from its
+   * arithmetic. Use this for what the effect list cannot say.
+   */
+  desc?: string;
   effects: RunEffect[];
   /** Hidden unless the run satisfies this. */
   requires?: { minScrap?: number; hasRelic?: string };
@@ -301,6 +307,7 @@ export interface ShopItemDef {
   /** relic id, part id, or a service id. */
   ref: string;
   name?: string;
+  /** Flavour only — see `EventOptionDef.desc`. Numbers come from `effects`. */
   desc?: string;
   effects?: RunEffect[];
 }

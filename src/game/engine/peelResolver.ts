@@ -158,7 +158,10 @@ export function peelPart(state: BattleState, slot: PartSlot, label: string): boo
     slot,
     partId,
     key: `peel-${state.seq}`,
-    x: 0.12 + rngFloat(rng) * 0.72,
+    // Scattered across the player's own side of the desk. The full width let
+    // parts settle under the enemy, where they read as the enemy's trophies
+    // rather than as pieces that just fell off the beast.
+    x: 0.07 + rngFloat(rng) * 0.3,
     rotation: -30 + rngFloat(rng) * 60,
   };
   commitRng(state, rng);

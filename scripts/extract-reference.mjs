@@ -57,6 +57,43 @@ const REGIONS = {
   part_tape_roll: { x: 461, y: 2821, w: 175, h: 175 },
 };
 
+/**
+ * Find the sub-rectangle that still holds drawn art.
+ *
+ * The v0.8 coordinate table was written against a 2048x2999 space for a sheet
+ * that ships at 1024x1500, so several regions overrun the drawn area and pick up
+ * the sheet's black margin. Left alone those crops render as a picture with a
+ * black bar down one side — which is exactly the defect the audit charged v0.8
+ * with. Edge rows and columns that are almost entirely near-black are not art,
+ * so they come off before the crop is written.
+ */
+async function contentBox(file) {
+  const { data, info } = await sharp(file).raw().toBuffer({ resolveWithObject: true });
+  const { width, height, channels } = info;
+  const luma = (x, y) => {
+    const i = (y * width + x) * channels;
+    return (data[i] + data[i + 1] + data[i + 2]) / 3;
+  };
+  const darkRow = (y) => {
+    let dark = 0;
+    for (let x = 0; x < width; x++) if (luma(x, y) < 18) dark++;
+    return dark / width > 0.9;
+  };
+  const darkCol = (x) => {
+    let dark = 0;
+    for (let y = 0; y < height; y++) if (luma(x, y) < 18) dark++;
+    return dark / height > 0.9;
+  };
+
+  let top = 0, bottom = height - 1, left = 0, right = width - 1;
+  while (top < bottom && darkRow(top)) top++;
+  while (bottom > top && darkRow(bottom)) bottom--;
+  while (left < right && darkCol(left)) left++;
+  while (right > left && darkCol(right)) right--;
+
+  return { left, top, width: right - left + 1, height: bottom - top + 1 };
+}
+
 /** Mean luma + share of near-black pixels, used to flag dead atlas regions. */
 async function inspect(file) {
   const { data, info } = await sharp(file).raw().toBuffer({ resolveWithObject: true });
@@ -88,11 +125,24 @@ async function main() {
     const height = Math.min(Math.round(r.h * sy), meta.height - top);
     const out = path.join(OUT, `${name}.png`);
     await sharp(ATLAS).extract({ left, top, width, height }).png({ compressionLevel: 9 }).toFile(out);
+
+    // Second pass: shave the black margin the oversized region pulled in.
+    // A region whose content box collapses is not a margin problem — it is a
+    // dead region, and it is left at full size so the report still shows it.
+    const box = await contentBox(out);
+    const shrank = box.width !== width || box.height !== height;
+    const applied = shrank && box.width > 8 && box.height > 8;
+    if (applied) {
+      const buf = await sharp(out).extract(box).png({ compressionLevel: 9 }).toBuffer();
+      await fs.writeFile(out, buf);
+    }
+
     const stats = await inspect(out);
     report.regions[name] = {
       file: `references/${name}.png`,
       declared: `${r.w}x${r.h}`,
       extracted: `${width}x${height}`,
+      ...(applied ? { trimmedTo: `${box.width}x${box.height}` } : {}),
       ...stats,
       verdict: stats.darkRatio > 0.85 ? 'empty' : stats.darkRatio > 0.25 ? 'partial' : 'ok',
     };

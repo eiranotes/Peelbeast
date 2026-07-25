@@ -24,6 +24,37 @@ const RELIC_ICON: Record<string, string> = {
   speed: 'icon.status.drift',
 };
 
+/**
+ * Services are one-off purchases with no art either, so they take the glyph of
+ * what they actually do. Falling back to a single shared icon put the same
+ * picture on a repair service and a sustain relic sitting next to each other,
+ * which is the "every item looks alike" defect this shop was rebuilt to avoid.
+ */
+const SERVICE_EFFECT_ICON: Record<string, string> = {
+  repairAllParts: 'icon.status.peel',
+  startBlock: 'icon.status.block',
+  startStatus: 'icon.status.focus',
+  glue: 'icon.status.glue',
+  hp: 'fx.patch',
+  scrap: 'ui.tag',
+};
+
+/**
+ * Most specific effect wins, not the first one listed. A repair service that
+ * happens to open with `hp` is still a repair service — reading the array in
+ * order gave it the generic patch glyph and put the same picture next to a
+ * sustain relic on the same shelf.
+ */
+const SERVICE_ICON_PRIORITY = ['repairAllParts', 'startStatus', 'startBlock', 'glue', 'hp', 'scrap'];
+
+function serviceIcon(effects: readonly { kind: string }[] | undefined): string {
+  const kinds = new Set((effects ?? []).map((e) => e.kind));
+  for (const kind of SERVICE_ICON_PRIORITY) {
+    if (kinds.has(kind)) return SERVICE_EFFECT_ICON[kind]!;
+  }
+  return 'ui.tag';
+}
+
 export function ShopScreen() {
   const { run, buy, leaveNode } = useGame();
   if (!run) return <EmptyNote>진행 중인 런이 없다.</EmptyNote>;
@@ -61,7 +92,7 @@ export function ShopScreen() {
           <div className="shop__preview">
             <PeelbeastFigure assembly={run.assembly} width={220} />
           </div>
-          <RefPhoto assetId="ref.stage" caption="desk, as drawn" tilt={2} className="shop__photo" />
+          <RefPhoto assetId="ref.coffee" caption="stock, as drawn" tilt={2} className="shop__photo" />
         </Panel>
 
         <div className="shop__grid">
@@ -72,7 +103,9 @@ export function ShopScreen() {
             const affordable = canAfford(run, shopId, item.id);
             const part = item.kind === 'part' ? PARTS[item.ref] : null;
             const relic = item.kind === 'relic' ? RELICS[item.ref] : null;
-            const art = part?.assetId ?? (relic ? (RELIC_ICON[relic.type] ?? 'ui.tag') : 'fx.patch');
+            const art =
+              part?.assetId ??
+              (relic ? (RELIC_ICON[relic.type] ?? 'ui.tag') : serviceIcon(item.effects));
             return (
               <button
                 key={item.id}

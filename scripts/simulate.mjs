@@ -121,9 +121,22 @@ function playBattle(state, maxTurns = 120) {
       b = resolvePlayerAction(b, b.player.hp < b.player.maxHp * 0.7 ? 'repair' : 'press');
       continue;
     }
-    // 4. spend a ready skill, else swing
-    const ready = SLOT_ORDER.find((s) => skillAvailability(b, s).enabled);
-    b = ready ? resolveSkill(b, ready) : resolvePlayerAction(b, 'attack');
+    // 4. spend a skill that moves the fight along, else swing
+    //
+    // "any ready skill" was wrong, and it mismeasured the game: a build whose
+    // four skills are all defensive always had one ready, so this policy never
+    // attacked and reported 0% wins over a 61-turn cap against a 24 hp rat.
+    // A skill is worth the turn if it deals damage; a purely defensive one is
+    // only worth it when there is something to defend against, and steps 1-3
+    // have already handled those cases.
+    const ready = SLOT_ORDER.filter((s) => skillAvailability(b, s).enabled);
+    const offensive = ready.find((s) => skillDealsDamage(b, s));
+    if (offensive) {
+      b = resolveSkill(b, offensive);
+      continue;
+    }
+    const worthHolding = threat >= 5 && ready.length > 0;
+    b = worthHolding ? resolveSkill(b, ready[0]) : resolvePlayerAction(b, 'attack');
   }
   return b;
 }
@@ -131,6 +144,13 @@ function playBattle(state, maxTurns = 120) {
 function partSkillId(b, slot) {
   const id = b.player.slots[slot].partId;
   return id ? PARTS[id]?.active.id ?? '' : '';
+}
+
+/** Whether this slot's skill actually threatens the enemy's hp bar. */
+function skillDealsDamage(b, slot) {
+  const id = b.player.slots[slot].partId;
+  const effects = id ? PARTS[id]?.active.effects ?? [] : [];
+  return effects.some((e) => e.kind === 'damage' && (e.amount ?? 0) > 0);
 }
 
 /** Pick the option that does not start a fight, so the walk stays comparable. */
