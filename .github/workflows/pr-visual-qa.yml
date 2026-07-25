@@ -1,0 +1,82 @@
+name: PR Visual QA
+
+on:
+  push:
+    branches:
+      - claude/peelbeast-full-redesign-25hux8
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Resolve Chromium path
+        shell: bash
+        run: |
+          echo "PLAYWRIGHT_CHROMIUM_PATH=$(node -e \"import('@playwright/test').then(m=>console.log(m.chromium.executablePath()))\")" >> "$GITHUB_ENV"
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Unit and integration tests
+        run: npm test
+
+      - name: End-to-end tests
+        run: npm run test:e2e
+
+      - name: Build production bundle
+        run: npm run build
+
+      - name: Start preview server
+        shell: bash
+        run: |
+          npm run preview -- --host 127.0.0.1 > /tmp/peelbeast-preview.log 2>&1 &
+          echo $! > /tmp/peelbeast-preview.pid
+          for i in {1..60}; do
+            if curl -fsS http://127.0.0.1:4173 >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/peelbeast-preview.log
+          exit 1
+
+      - name: Capture current PR screenshots
+        run: node scripts/shoot.mjs qa-screenshots
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: peelbeast-pr2-visual-qa
+          path: qa-screenshots/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: peelbeast-pr2-playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 14
