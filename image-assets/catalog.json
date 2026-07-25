@@ -1,0 +1,27 @@
+{
+  "version": "1.0.0-github-lite",
+  "assetCount": 20,
+  "chromaKey": "#FF00FF",
+  "assets": [
+    {"id":"enemy_book_mimic","file":"generated-v1/chroma/enemy_book_mimic.webp","width":128,"height":128,"format":"webp","status":"generated-concept"},
+    {"id":"enemy_candle_monster","file":"generated-v1/chroma/enemy_candle_monster.webp","width":128,"height":128,"format":"webp","status":"generated-concept"},
+    {"id":"enemy_dice_mimic","file":"generated-v1/chroma/enemy_dice_mimic.webp","width":128,"height":128,"format":"webp","status":"generated-concept"},
+    {"id":"enemy_mecha_spider","file":"generated-v1/chroma/enemy_mecha_spider.webp","width":128,"height":128,"format":"webp","status":"generated-concept"},
+    {"id":"enemy_tape_turret","file":"generated-v1/chroma/enemy_tape_turret.webp","width":128,"height":128,"format":"webp","status":"generated-concept"},
+    {"id":"equipment_patchwork_umbrella","file":"generated-v1/chroma/equipment_patchwork_umbrella.webp","width":128,"height":128,"format":"webp","status":"generated-concept"},
+    {"id":"location_barricade_fort","file":"generated-v1/chroma/location_barricade_fort.webp","width":128,"height":128,"format":"webp","status":"generated-concept"},
+    {"id":"location_boss_gate","file":"generated-v1/chroma/location_boss_gate.webp","width":128,"height":128,"format":"webp","status":"generated-concept"},
+    {"id":"location_healing_altar","file":"generated-v1/chroma/location_healing_altar.webp","width":128,"height":128,"format":"webp","status":"generated-concept"},
+    {"id":"location_shop_stall","file":"generated-v1/chroma/location_shop_stall.webp","width":128,"height":128,"format":"webp","status":"generated-concept"},
+    {"id":"location_sticker_gacha","file":"generated-v1/chroma/location_sticker_gacha.webp","width":128,"height":128,"format":"webp","status":"generated-concept"},
+    {"id":"location_upgrade_altar","file":"generated-v1/chroma/location_upgrade_altar.webp","width":128,"height":128,"format":"webp","status":"generated-concept"},
+    {"id":"prop_vintage_terminal","file":"generated-v1/chroma/prop_vintage_terminal.webp","width":128,"height":128,"format":"webp","status":"generated-concept"},
+    {"id":"resource_scrap_crate","file":"generated-v1/chroma/resource_scrap_crate.webp","width":128,"height":128,"format":"webp","status":"generated-concept"},
+    {"id":"reward_treasure_chest","file":"generated-v1/chroma/reward_treasure_chest.webp","width":128,"height":128,"format":"webp","status":"generated-concept"},
+    {"id":"ui_reward_board","file":"generated-v1/chroma/ui_reward_board.webp","width":128,"height":128,"format":"webp","status":"generated-concept"},
+    {"id":"ui_route_signpost","file":"generated-v1/chroma/ui_route_signpost.webp","width":128,"height":128,"format":"webp","status":"generated-concept"},
+    {"id":"ui_start_sign","file":"generated-v1/chroma/ui_start_sign.webp","width":128,"height":128,"format":"webp","status":"generated-concept"},
+    {"id":"weapon_dolphin_watergun","file":"generated-v1/chroma/weapon_dolphin_watergun.webp","width":128,"height":128,"format":"webp","status":"generated-concept"},
+    {"id":"weapon_scissor_lance","file":"generated-v1/chroma/weapon_scissor_lance.webp","width":128,"height":128,"format":"webp","status":"generated-concept"}
+  ]
+}
