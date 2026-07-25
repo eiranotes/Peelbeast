@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useGame } from '@/app/gameStore';
 import { PARTS, partsForSlot } from '@/game/data/parts';
 import { SYNERGIES } from '@/game/data/synergies';
@@ -40,6 +40,24 @@ function Workshop({ run }: { run: NonNullable<ReturnType<typeof useGame>['run']>
     sync();
     mq.addEventListener('change', sync);
     return () => mq.removeEventListener('change', sync);
+  }, []);
+
+  // Same reasoning as the battle stage: the bench gives up height on a short
+  // window, so a fixed figure width would be clipped by its overflow.
+  const benchRef = useRef<HTMLDivElement>(null);
+  const [benchWidth, setBenchWidth] = useState(330);
+
+  useLayoutEffect(() => {
+    const el = benchRef.current;
+    if (!el) return;
+    const measure = () => {
+      const byHeight = (el.clientHeight - 24) / (940 / 800); // body aspect ratio
+      setBenchWidth(Math.max(150, Math.min(330, byHeight, el.clientWidth * 0.62)));
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
   }, []);
 
   const build = useMemo(() => computeBuild(run.assembly, { relics: run.relics }), [run.assembly, run.relics]);
@@ -86,10 +104,10 @@ function Workshop({ run }: { run: NonNullable<ReturnType<typeof useGame>['run']>
         {/* ── bench: the beast itself ─────────────────────────────────────── */}
         <Panel className="workshop__bench" tape>
           <Sprite assetId="bg.desk" className="workshop__bench-bg" decorative />
-          <div className="workshop__bench-inner">
+          <div className="workshop__bench-inner" ref={benchRef}>
             <PeelbeastFigure
               assembly={shownAssembly}
-              width={330}
+              width={benchWidth}
               emphasis={preview ? PARTS[preview]?.slot : activeSlot}
               onSlotClick={(slot) => {
                 setActiveSlot(slot);

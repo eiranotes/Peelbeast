@@ -403,7 +403,16 @@
   gap: 18px;
   align-items: start;
 }
-.workshop__bench { grid-area: bench; position: relative; overflow: hidden; min-height: 470px; }
+/* The bench is the showpiece, but on a short window a fixed 470px pushed the
+   parts drawer — the only thing on this screen you act on — entirely below the
+   fold, so the drawer was invisible until you thought to scroll. It gives back
+   height the way the battle stage does. */
+.workshop__bench {
+  grid-area: bench;
+  position: relative;
+  overflow: hidden;
+  min-height: min(470px, 52vh);
+}
 .workshop__readout { grid-area: readout; }
 .workshop__catalogue { grid-area: catalogue; }
 .workshop__route { grid-area: route; }
@@ -420,7 +429,7 @@
   position: relative;
   display: grid;
   place-items: end center;
-  min-height: 430px;
+  min-height: min(430px, 48vh);
   padding-top: 18px;
 }
 .workshop__prop {
@@ -1296,9 +1305,11 @@
   .battle__side { padding-top: 4px; }
   .peel-status,
   .battle-log { padding: 9px; }
+  /* Drawer before readout: the drawer is what you act on, the readout is what
+     you check afterwards. */
   .workshop__grid {
     grid-template-columns: 1fr;
-    grid-template-areas: 'bench' 'readout' 'catalogue' 'route';
+    grid-template-areas: 'bench' 'catalogue' 'readout' 'route';
   }
 }
 
