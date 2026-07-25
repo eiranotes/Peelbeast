@@ -1,0 +1,296 @@
+/**
+ * PEELBEAST design tokens and shell.
+ *
+ * The look is taken from the v0.8 reference sheet: a brown desk, a cream ruled
+ * page, and everything on top of it cut out of paper. Three rules keep it from
+ * drifting into generic dashboard UI:
+ *   1. Panels are torn/taped paper, never uniform rounded cards.
+ *   2. Type is large; nothing mechanical is smaller than 13px.
+ *   3. The character is the biggest thing on the battle screen.
+ */
+
+@font-face {
+  font-family: 'PeelbeastFallback';
+  src: local('Trebuchet MS'), local('Verdana'), local('sans-serif');
+}
+
+:root {
+  --paper: #f6ecd4;
+  --paper-2: #eddfba;
+  --paper-3: #e2d0a6;
+  --paper-hi: #fdf8ea;
+  --ink: #3a2b1e;
+  --ink-soft: #6b5340;
+  --ink-faint: #907a63;
+
+  --desk: #8a6242;
+  --desk-dark: #5f4029;
+  --desk-deep: #4a3120;
+
+  --red: #b4533b;
+  --red-dark: #8e3c28;
+  --blue: #5b7396;
+  --green: #6f8b63;
+  --gold: #c4a05c;
+  --purple: #8361a7;
+
+  --danger-low: #7e9166;
+  --danger-medium: #c4a05c;
+  --danger-high: #c47a45;
+  --danger-extreme: #b4533b;
+
+  --shadow-lift: 0 10px 22px rgba(48, 28, 12, 0.22);
+  --shadow-flat: 0 4px 10px rgba(48, 28, 12, 0.16);
+  --shadow-deep: 0 18px 40px rgba(38, 22, 10, 0.3);
+
+  --radius: 14px;
+  --tape: #efe2c0;
+
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: 'Trebuchet MS', 'Apple SD Gothic Neo', 'Noto Sans KR', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.45;
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(255, 244, 218, 0.35), transparent 55%),
+    linear-gradient(178deg, var(--desk) 0%, var(--desk-dark) 58%, var(--desk-deep) 100%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+/* wood grain — cheap, and it stops the desk reading as a flat brown fill */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image: repeating-linear-gradient(
+    91deg,
+    rgba(255, 255, 255, 0.05) 0px,
+    rgba(255, 255, 255, 0.05) 2px,
+    transparent 2px,
+    transparent 26px
+  );
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+/* ── paper surfaces ──────────────────────────────────────────────────────── */
+
+.paper {
+  position: relative;
+  background: var(--paper);
+  box-shadow: var(--shadow-lift);
+  /* hand-cut edge rather than a uniform border-radius */
+  clip-path: polygon(
+    0.6% 1.4%, 22% 0.2%, 48% 1.6%, 74% 0.1%, 99.4% 1.8%,
+    100% 26%, 99.2% 52%, 100% 77%, 99.3% 98.4%,
+    76% 100%, 51% 98.6%, 26% 100%, 1.2% 98.2%,
+    0.2% 74%, 1% 49%, 0% 24%
+  );
+}
+
+.paper--ruled::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image: repeating-linear-gradient(
+    180deg,
+    transparent 0px,
+    transparent 33px,
+    rgba(120, 150, 180, 0.22) 33px,
+    rgba(120, 150, 180, 0.22) 34px
+  );
+}
+
+.paper--note {
+  background: linear-gradient(178deg, var(--paper-hi), var(--paper));
+}
+
+.tape-strip {
+  position: absolute;
+  width: 108px;
+  height: 30px;
+  background: var(--tape);
+  opacity: 0.94;
+  box-shadow: 0 2px 5px rgba(60, 38, 16, 0.18);
+  pointer-events: none;
+}
+.tape-strip::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 62% 0;
+  background: rgba(255, 255, 255, 0.35);
+}
+.tape-strip--tl {
+  top: -14px;
+  left: 26px;
+  transform: rotate(-7deg);
+}
+.tape-strip--tr {
+  top: -14px;
+  right: 26px;
+  transform: rotate(6deg);
+}
+
+/* ── shared controls ─────────────────────────────────────────────────────── */
+
+.btn {
+  appearance: none;
+  border: 2px solid rgba(58, 43, 30, 0.16);
+  background: var(--paper-hi);
+  padding: 12px 18px;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: var(--shadow-flat);
+  clip-path: polygon(1% 4%, 30% 0%, 70% 3%, 99% 0%, 100% 50%, 99% 96%, 68% 100%, 32% 97%, 2% 100%, 0% 52%);
+  transition: transform 90ms ease, background 140ms ease, box-shadow 140ms ease;
+}
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px) rotate(-0.3deg);
+  background: #fffaf0;
+}
+.btn:active:not(:disabled) {
+  transform: translateY(1px) scale(0.985);
+  box-shadow: 0 2px 5px rgba(48, 28, 12, 0.2);
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.btn--primary {
+  background: var(--red);
+  color: #fff6e6;
+  border-color: rgba(0, 0, 0, 0.18);
+}
+.btn--primary:hover:not(:disabled) {
+  background: #c25f45;
+}
+.btn--ghost {
+  background: rgba(253, 248, 234, 0.72);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  background: var(--paper-hi);
+  border: 1.5px solid rgba(58, 43, 30, 0.16);
+  box-shadow: var(--shadow-flat);
+  clip-path: polygon(2% 6%, 40% 0%, 98% 4%, 100% 60%, 96% 100%, 44% 96%, 3% 100%, 0% 44%);
+}
+
+.label {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--ink-faint);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ── app shell ───────────────────────────────────────────────────────────── */
+
+.app {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.app__bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 7px 20px;
+  flex-wrap: wrap;
+  background: linear-gradient(180deg, rgba(48, 30, 14, 0.4), transparent);
+}
+
+.app__brand {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  color: var(--paper-hi);
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.app__nav {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+
+.app__nav .btn {
+  padding: 7px 13px;
+  font-size: 13px;
+}
+
+.app__main {
+  flex: 1;
+  padding: 0 20px 22px;
+  max-width: 1560px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.screen {
+  animation: screen-in 260ms ease both;
+}
+
+@keyframes screen-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+}

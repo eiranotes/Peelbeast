@@ -1,0 +1,266 @@
+{
+  "atlas": {
+    "file": "assets/source/reference/legacy-atlas-v0.8.webp",
+    "actual": "1024x1500",
+    "declared": "2048x2999",
+    "hasAlpha": false
+  },
+  "regions": {
+    "stage_bg_base": {
+      "file": "references/stage_bg_base.png",
+      "declared": "1152x1180",
+      "extracted": "576x590",
+      "meanLuma": 139,
+      "darkRatio": 0.183,
+      "verdict": "ok"
+    },
+    "hero_full": {
+      "file": "references/hero_full.png",
+      "declared": "790x800",
+      "extracted": "395x400",
+      "meanLuma": 165.6,
+      "darkRatio": 0.001,
+      "verdict": "ok"
+    },
+    "prop_tornpaper_right": {
+      "file": "references/prop_tornpaper_right.png",
+      "declared": "254x566",
+      "extracted": "127x283",
+      "meanLuma": 37.7,
+      "darkRatio": 0.701,
+      "verdict": "partial"
+    },
+    "part_umbrella": {
+      "file": "references/part_umbrella.png",
+      "declared": "425x535",
+      "extracted": "213x268",
+      "meanLuma": 151.5,
+      "darkRatio": 0.006,
+      "verdict": "ok"
+    },
+    "part_spear": {
+      "file": "references/part_spear.png",
+      "declared": "245x510",
+      "extracted": "123x255",
+      "meanLuma": 153.8,
+      "darkRatio": 0.008,
+      "verdict": "ok"
+    },
+    "prop_hold_card": {
+      "file": "references/prop_hold_card.png",
+      "declared": "380x510",
+      "extracted": "190x255",
+      "meanLuma": 158.9,
+      "darkRatio": 0.15,
+      "verdict": "ok"
+    },
+    "part_scissors": {
+      "file": "references/part_scissors.png",
+      "declared": "410x480",
+      "extracted": "205x240",
+      "meanLuma": 154.2,
+      "darkRatio": 0.002,
+      "verdict": "ok"
+    },
+    "enemy_pencil_rat": {
+      "file": "references/enemy_pencil_rat.png",
+      "declared": "350x460",
+      "extracted": "175x230",
+      "meanLuma": 121.4,
+      "darkRatio": 0.112,
+      "verdict": "ok"
+    },
+    "enemy_tape_spider": {
+      "file": "references/enemy_tape_spider.png",
+      "declared": "415x445",
+      "extracted": "208x223",
+      "meanLuma": 112.1,
+      "darkRatio": 0.226,
+      "verdict": "ok"
+    },
+    "prop_pencilcup_left": {
+      "file": "references/prop_pencilcup_left.png",
+      "declared": "125x410",
+      "extracted": "63x205",
+      "meanLuma": 140.9,
+      "darkRatio": 0.015,
+      "verdict": "ok"
+    },
+    "enemy_scissor_crow": {
+      "file": "references/enemy_scissor_crow.png",
+      "declared": "377x380",
+      "extracted": "189x190",
+      "meanLuma": 91.7,
+      "darkRatio": 0.242,
+      "verdict": "ok"
+    },
+    "icon_bomb": {
+      "file": "references/icon_bomb.png",
+      "declared": "340x360",
+      "extracted": "170x180",
+      "meanLuma": 137.1,
+      "darkRatio": 0.003,
+      "verdict": "ok"
+    },
+    "part_bomb": {
+      "file": "references/part_bomb.png",
+      "declared": "340x360",
+      "extracted": "170x180",
+      "meanLuma": 137,
+      "darkRatio": 0.003,
+      "verdict": "ok"
+    },
+    "icon_toast": {
+      "file": "references/icon_toast.png",
+      "declared": "430x350",
+      "extracted": "215x175",
+      "meanLuma": 175.8,
+      "darkRatio": 0.001,
+      "verdict": "ok"
+    },
+    "part_toast": {
+      "file": "references/part_toast.png",
+      "declared": "430x350",
+      "extracted": "215x175",
+      "meanLuma": 175.8,
+      "darkRatio": 0.001,
+      "verdict": "ok"
+    },
+    "icon_box_shell": {
+      "file": "references/icon_box_shell.png",
+      "declared": "226x280",
+      "extracted": "113x140",
+      "meanLuma": 0.1,
+      "darkRatio": 1,
+      "verdict": "empty"
+    },
+    "icon_eye_sticker": {
+      "file": "references/icon_eye_sticker.png",
+      "declared": "182x280",
+      "extracted": "91x140",
+      "meanLuma": 0,
+      "darkRatio": 1,
+      "verdict": "empty"
+    },
+    "icon_spear": {
+      "file": "references/icon_spear.png",
+      "declared": "206x280",
+      "extracted": "103x140",
+      "meanLuma": 0,
+      "darkRatio": 1,
+      "verdict": "empty"
+    },
+    "icon_tape_roll": {
+      "file": "references/icon_tape_roll.png",
+      "declared": "199x280",
+      "extracted": "100x140",
+      "meanLuma": 0.1,
+      "darkRatio": 1,
+      "verdict": "empty"
+    },
+    "part_coffee": {
+      "file": "references/part_coffee.png",
+      "declared": "265x250",
+      "extracted": "133x125",
+      "meanLuma": 158.7,
+      "darkRatio": 0.005,
+      "verdict": "ok"
+    },
+    "icon_mug": {
+      "file": "references/icon_mug.png",
+      "declared": "235x245",
+      "extracted": "118x123",
+      "meanLuma": 0.3,
+      "darkRatio": 1,
+      "verdict": "empty"
+    },
+    "icon_patch": {
+      "file": "references/icon_patch.png",
+      "declared": "250x245",
+      "extracted": "125x123",
+      "meanLuma": 0.2,
+      "darkRatio": 1,
+      "verdict": "empty"
+    },
+    "icon_umbrella": {
+      "file": "references/icon_umbrella.png",
+      "declared": "225x245",
+      "extracted": "113x123",
+      "meanLuma": 0.2,
+      "darkRatio": 1,
+      "verdict": "empty"
+    },
+    "part_box_shell": {
+      "file": "references/part_box_shell.png",
+      "declared": "210x230",
+      "extracted": "105x115",
+      "meanLuma": 158,
+      "darkRatio": 0,
+      "verdict": "ok"
+    },
+    "part_ribbon": {
+      "file": "references/part_ribbon.png",
+      "declared": "265x200",
+      "extracted": "133x100",
+      "meanLuma": 172.4,
+      "darkRatio": 0.001,
+      "verdict": "ok"
+    },
+    "icon_ghost": {
+      "file": "references/icon_ghost.png",
+      "declared": "184x190",
+      "extracted": "92x95",
+      "meanLuma": 0.1,
+      "darkRatio": 1,
+      "verdict": "empty"
+    },
+    "icon_ribbon_red": {
+      "file": "references/icon_ribbon_red.png",
+      "declared": "186x190",
+      "extracted": "93x95",
+      "meanLuma": 0,
+      "darkRatio": 1,
+      "verdict": "empty"
+    },
+    "icon_scissors_red": {
+      "file": "references/icon_scissors_red.png",
+      "declared": "195x190",
+      "extracted": "98x95",
+      "meanLuma": 0.1,
+      "darkRatio": 1,
+      "verdict": "empty"
+    },
+    "part_eye_sticker": {
+      "file": "references/part_eye_sticker.png",
+      "declared": "173x183",
+      "extracted": "87x92",
+      "meanLuma": 161.6,
+      "darkRatio": 0,
+      "verdict": "ok"
+    },
+    "part_ghost_charm": {
+      "file": "references/part_ghost_charm.png",
+      "declared": "178x178",
+      "extracted": "89x89",
+      "meanLuma": 151.1,
+      "darkRatio": 0.002,
+      "verdict": "ok"
+    },
+    "part_patchbread": {
+      "file": "references/part_patchbread.png",
+      "declared": "275x175",
+      "extracted": "138x88",
+      "meanLuma": 126.3,
+      "darkRatio": 0.001,
+      "verdict": "ok"
+    },
+    "part_tape_roll": {
+      "file": "references/part_tape_roll.png",
+      "declared": "175x175",
+      "extracted": "88x88",
+      "meanLuma": 162.3,
+      "darkRatio": 0.01,
+      "verdict": "ok"
+    }
+  }
+}

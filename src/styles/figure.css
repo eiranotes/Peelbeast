@@ -1,0 +1,191 @@
+/**
+ * The assembled beast. Layers are positioned from catalog anchors by
+ * `PeelbeastFigure`; everything here is motion and lighting only.
+ */
+
+.figure {
+  position: relative;
+  flex: none;
+}
+
+.figure__shadow {
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  height: 26px;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse, rgba(52, 32, 14, 0.4), rgba(52, 32, 14, 0.05) 66%, transparent 72%);
+  pointer-events: none;
+}
+
+.figure__body,
+.figure__part {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.figure__body {
+  animation: beast-breathe 3.6s ease-in-out infinite;
+  transform-origin: 50% 100%;
+}
+
+.figure__part {
+  padding: 0;
+  border: 0;
+  background: none;
+  transform: rotate(var(--part-rotation, 0deg));
+  will-change: transform;
+}
+
+.figure__part-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.figure__part--interactive {
+  cursor: pointer;
+}
+.figure__part--interactive:hover,
+.figure__part.is-emphasised {
+  filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0)) drop-shadow(0 4px 10px rgba(180, 83, 59, 0.55));
+}
+
+/* per-asset idle motion, driven by `animationProfile` in the catalog */
+.figure__part--anim-soft-bounce {
+  animation: part-bounce 3.2s ease-in-out infinite;
+}
+.figure__part--anim-sway {
+  animation: part-sway 4.4s ease-in-out infinite;
+}
+.figure__part--anim-jitter {
+  animation: part-jitter 2.4s steps(6, end) infinite;
+}
+.figure__part--anim-float {
+  animation: part-float 5s ease-in-out infinite;
+}
+.figure__part--anim-spin-slow {
+  animation: part-spin 14s linear infinite;
+}
+
+@keyframes beast-breathe {
+  0%, 100% { transform: scaleY(1) translateY(0); }
+  50% { transform: scaleY(1.014) translateY(-3px); }
+}
+@keyframes part-bounce {
+  0%, 100% { transform: rotate(var(--part-rotation, 0deg)) translateY(0); }
+  50% { transform: rotate(var(--part-rotation, 0deg)) translateY(-4px); }
+}
+@keyframes part-sway {
+  0%, 100% { transform: rotate(calc(var(--part-rotation, 0deg) - 2deg)); }
+  50% { transform: rotate(calc(var(--part-rotation, 0deg) + 3deg)); }
+}
+@keyframes part-jitter {
+  0%, 100% { transform: rotate(var(--part-rotation, 0deg)) translate(0, 0); }
+  40% { transform: rotate(calc(var(--part-rotation, 0deg) + 1.2deg)) translate(1px, -1px); }
+  70% { transform: rotate(calc(var(--part-rotation, 0deg) - 1deg)) translate(-1px, 1px); }
+}
+@keyframes part-float {
+  0%, 100% { transform: rotate(var(--part-rotation, 0deg)) translateY(0); }
+  50% { transform: rotate(calc(var(--part-rotation, 0deg) + 2deg)) translateY(-7px); }
+}
+@keyframes part-spin {
+  from { transform: rotate(var(--part-rotation, 0deg)); }
+  to { transform: rotate(calc(var(--part-rotation, 0deg) + 360deg)); }
+}
+
+/* ── the peel ─────────────────────────────────────────────────────────────
+   A part that comes off tears free, tumbles and lands. This is the whole
+   pitch of the game, so it gets a real 0.9s animation rather than a fade. */
+.figure__part--falling {
+  animation: part-peel 900ms cubic-bezier(0.3, 0.05, 0.5, 1) forwards;
+  z-index: 60 !important;
+  pointer-events: none;
+}
+
+@keyframes part-peel {
+  0% {
+    transform: rotate(var(--part-rotation, 0deg)) translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  18% {
+    transform: rotate(calc(var(--part-rotation, 0deg) - 16deg)) translate(6px, -18px) scale(1.06);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(calc(var(--part-rotation, 0deg) + 120deg)) translate(46px, 210px) scale(0.82);
+    opacity: 0;
+  }
+}
+
+/* ── poses ───────────────────────────────────────────────────────────────── */
+
+.figure--attack {
+  animation: pose-attack 340ms ease-out;
+}
+.figure--hit {
+  animation: pose-hit 320ms ease-out;
+}
+.figure--guard {
+  animation: pose-guard 400ms ease-out;
+}
+.figure--repair {
+  animation: pose-repair 460ms ease-out;
+}
+.figure--win {
+  animation: pose-win 900ms ease-out;
+}
+.figure--lose {
+  animation: pose-lose 700ms ease-in forwards;
+}
+
+@keyframes pose-attack {
+  0% { transform: translateX(0) rotate(0); }
+  32% { transform: translateX(26px) rotate(4deg) scale(1.03); }
+  100% { transform: translateX(0) rotate(0); }
+}
+@keyframes pose-hit {
+  0%, 100% { transform: translateX(0); filter: none; }
+  20% { transform: translateX(-13px) rotate(-3deg); filter: brightness(1.35) saturate(0.6); }
+  45% { transform: translateX(9px) rotate(2deg); }
+  70% { transform: translateX(-4px); }
+}
+@keyframes pose-guard {
+  0%, 100% { transform: translateY(0) scale(1); }
+  40% { transform: translateY(6px) scale(0.95, 1.05); }
+}
+@keyframes pose-repair {
+  0%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-10px) scale(1.02); }
+  60% { transform: translateY(2px); }
+}
+@keyframes pose-win {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  25% { transform: translateY(-24px) rotate(-5deg); }
+  55% { transform: translateY(0) rotate(4deg); }
+  80% { transform: translateY(-10px) rotate(-2deg); }
+}
+@keyframes pose-lose {
+  to { transform: translateY(28px) rotate(-14deg); opacity: 0.55; filter: grayscale(0.7); }
+}
+
+/* dev anchor overlay */
+.figure__attach,
+.figure__anchor {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border-radius: 50%;
+  z-index: 99;
+  pointer-events: none;
+}
+.figure__attach {
+  background: rgba(180, 83, 59, 0.9);
+  box-shadow: 0 0 0 2px #fff;
+}
+.figure__anchor {
+  background: rgba(91, 115, 150, 0.9);
+  box-shadow: 0 0 0 2px #fff;
+}
