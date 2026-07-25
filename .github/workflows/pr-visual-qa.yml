@@ -1,6 +1,9 @@
 name: PR Visual QA
 
 on:
+  pull_request:
+    branches:
+      - main
   push:
     branches:
       - claude/peelbeast-full-redesign-25hux8
