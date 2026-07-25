@@ -1541,7 +1541,22 @@
   .slot-tab span { font-size: 12.5px; }
   .slot-tab em { font-size: 10px; }
 
+  /* On a phone the shop's counter panel — blurb, figure, framed photo — filled
+     the entire first screen, so the goods began below the fold on a screen
+     whose whole purpose is buying. What you act on goes first; the decoration
+     keeps its blurb and drops the rest. Same for the outcome screens. */
+  .shop__layout { display: flex; flex-direction: column; }
+  .shop__counter { order: 1; }
+  .shop__counter-art,
+  .shop__preview,
+  .shop__photo { display: none; }
   .shop__grid { grid-template-columns: 1fr; }
+
+  .reward__layout,
+  .result__layout { display: flex; flex-direction: column; }
+  .reward__figure,
+  .result__figure { order: 1; min-height: 220px; }
+
   .route-pick__grid { grid-template-columns: 1fr; }
   .title__word { font-size: 34px; }
   .title__card { padding: 20px 18px; }
