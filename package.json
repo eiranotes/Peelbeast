@@ -1,0 +1,41 @@
+{
+  "name": "peelbeast",
+  "private": true,
+  "version": "0.9.0",
+  "type": "module",
+  "description": "PEELBEAST — paper-craft parts-assembly turn-based roguelike",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "simulate": "node --import ./scripts/lib/ts-resolve.mjs scripts/simulate.mjs",
+    "assets:reference": "node scripts/extract-reference.mjs",
+    "assets:sprites": "node scripts/build-sprites.mjs",
+    "assets:atlas": "node scripts/build-atlas.mjs",
+    "assets:catalog": "node scripts/export-catalog.mjs",
+    "assets:validate": "node scripts/validate-assets.mjs",
+    "assets:all": "npm run assets:sprites && npm run assets:atlas && npm run assets:catalog && npm run assets:validate"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.1",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/node": "^26.1.1",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "jsdom": "^25.0.1",
+    "sharp": "^0.33.5",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.7",
+    "vitest": "^2.1.8"
+  }
+}

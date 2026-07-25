@@ -1,0 +1,1598 @@
+{
+  "generatedBy": "scripts/export-catalog.mjs",
+  "note": "Mirror of src/assets/assetCatalog.ts. Edit the TypeScript file, not this one.",
+  "count": 68,
+  "assets": {
+    "body.cat": {
+      "id": "body.cat",
+      "displayName": "Peelbeast Cat",
+      "category": "body",
+      "file": "/assets/bodies/cat.png",
+      "fallbackFile": "/assets/placeholders/body.png",
+      "referenceFile": "/assets/references/hero_full.png",
+      "width": 800,
+      "height": 940,
+      "anchorX": 0.5,
+      "anchorY": 1,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 20,
+      "attach": {
+        "head": {
+          "x": 0.5,
+          "y": 0.4
+        },
+        "hand": {
+          "x": 0.855,
+          "y": 0.515
+        },
+        "core": {
+          "x": 0.5,
+          "y": 0.7
+        },
+        "trinket": {
+          "x": 0.5,
+          "y": 0.475
+        }
+      },
+      "animationProfile": "soft-bounce",
+      "visualBounds": {
+        "x": 0.1,
+        "y": 0.32,
+        "w": 0.8,
+        "h": 0.62
+      },
+      "tags": [
+        "player",
+        "cat",
+        "paper"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "part.head.toast_helm": {
+      "id": "part.head.toast_helm",
+      "displayName": "Toast Helm",
+      "category": "part",
+      "slot": "head",
+      "file": "/assets/parts/head/toast_helm.png",
+      "fallbackFile": "/assets/placeholders/head.png",
+      "referenceFile": "/assets/references/part_toast.png",
+      "width": 496,
+      "height": 464,
+      "anchorX": 0.5,
+      "anchorY": 0.9,
+      "scale": 0.46,
+      "rotation": -5,
+      "zIndex": 30,
+      "bodyCompatibility": [
+        "body.cat"
+      ],
+      "animationProfile": "soft-bounce",
+      "tags": [
+        "bread",
+        "warm",
+        "focus"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "part.head.box_shell": {
+      "id": "part.head.box_shell",
+      "displayName": "Box Shell",
+      "category": "part",
+      "slot": "head",
+      "file": "/assets/parts/head/box_shell.png",
+      "fallbackFile": "/assets/placeholders/head.png",
+      "referenceFile": "/assets/references/part_box_shell.png",
+      "width": 472,
+      "height": 448,
+      "anchorX": 0.5,
+      "anchorY": 0.94,
+      "scale": 0.46,
+      "rotation": -3,
+      "zIndex": 30,
+      "bodyCompatibility": [
+        "body.cat"
+      ],
+      "animationProfile": "static",
+      "tags": [
+        "cardboard",
+        "guard",
+        "bulk"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "part.head.ghost_hood": {
+      "id": "part.head.ghost_hood",
+      "displayName": "Ghost Hood",
+      "category": "part",
+      "slot": "head",
+      "file": "/assets/parts/head/ghost_hood.png",
+      "fallbackFile": "/assets/placeholders/head.png",
+      "referenceFile": "/assets/references/part_ghost_charm.png",
+      "width": 424,
+      "height": 468,
+      "anchorX": 0.5,
+      "anchorY": 0.88,
+      "scale": 0.4,
+      "rotation": 2,
+      "zIndex": 30,
+      "bodyCompatibility": [
+        "body.cat"
+      ],
+      "animationProfile": "float",
+      "tags": [
+        "ghost",
+        "drift",
+        "light"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "part.hand.scissors": {
+      "id": "part.hand.scissors",
+      "displayName": "Scissors",
+      "category": "part",
+      "slot": "hand",
+      "file": "/assets/parts/hand/scissors.png",
+      "fallbackFile": "/assets/placeholders/hand.png",
+      "referenceFile": "/assets/references/part_scissors.png",
+      "width": 492,
+      "height": 524,
+      "anchorX": 0.5,
+      "anchorY": 0.78,
+      "scale": 0.36,
+      "rotation": 12,
+      "zIndex": 40,
+      "bodyCompatibility": [
+        "body.cat"
+      ],
+      "animationProfile": "jitter",
+      "tags": [
+        "blade",
+        "cut",
+        "red"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "part.hand.pencil_spear": {
+      "id": "part.hand.pencil_spear",
+      "displayName": "Pencil Spear",
+      "category": "part",
+      "slot": "hand",
+      "file": "/assets/parts/hand/pencil_spear.png",
+      "fallbackFile": "/assets/placeholders/hand.png",
+      "referenceFile": "/assets/references/part_spear.png",
+      "width": 288,
+      "height": 624,
+      "anchorX": 0.5,
+      "anchorY": 0.62,
+      "scale": 0.17,
+      "rotation": 16,
+      "zIndex": 40,
+      "bodyCompatibility": [
+        "body.cat"
+      ],
+      "animationProfile": "static",
+      "tags": [
+        "pierce",
+        "pin",
+        "graphite"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "part.hand.umbrella_hook": {
+      "id": "part.hand.umbrella_hook",
+      "displayName": "Umbrella Hook",
+      "category": "part",
+      "slot": "hand",
+      "file": "/assets/parts/hand/umbrella_hook.png",
+      "fallbackFile": "/assets/placeholders/hand.png",
+      "referenceFile": "/assets/references/part_umbrella.png",
+      "width": 524,
+      "height": 548,
+      "anchorX": 0.36,
+      "anchorY": 0.82,
+      "scale": 0.44,
+      "rotation": -6,
+      "zIndex": 40,
+      "bodyCompatibility": [
+        "body.cat"
+      ],
+      "animationProfile": "sway",
+      "tags": [
+        "shelter",
+        "ink",
+        "block"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "part.core.bomb_belly": {
+      "id": "part.core.bomb_belly",
+      "displayName": "Bomb Belly",
+      "category": "part",
+      "slot": "core",
+      "file": "/assets/parts/core/bomb_belly.png",
+      "fallbackFile": "/assets/placeholders/core.png",
+      "referenceFile": "/assets/references/part_bomb.png",
+      "width": 428,
+      "height": 428,
+      "anchorX": 0.49,
+      "anchorY": 0.55,
+      "scale": 0.34,
+      "rotation": 0,
+      "zIndex": 26,
+      "bodyCompatibility": [
+        "body.cat"
+      ],
+      "animationProfile": "jitter",
+      "tags": [
+        "burst",
+        "volatile",
+        "black"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "part.core.coffee_cup": {
+      "id": "part.core.coffee_cup",
+      "displayName": "Coffee Cup",
+      "category": "part",
+      "slot": "core",
+      "file": "/assets/parts/core/coffee_cup.png",
+      "fallbackFile": "/assets/placeholders/core.png",
+      "referenceFile": "/assets/references/part_coffee.png",
+      "width": 448,
+      "height": 388,
+      "anchorX": 0.44,
+      "anchorY": 0.55,
+      "scale": 0.32,
+      "rotation": 4,
+      "zIndex": 26,
+      "bodyCompatibility": [
+        "body.cat"
+      ],
+      "animationProfile": "soft-bounce",
+      "tags": [
+        "glue",
+        "haste",
+        "warm"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "part.core.tape_roll": {
+      "id": "part.core.tape_roll",
+      "displayName": "Tape Roll",
+      "category": "part",
+      "slot": "core",
+      "file": "/assets/parts/core/tape_roll.png",
+      "fallbackFile": "/assets/placeholders/core.png",
+      "referenceFile": "/assets/references/part_tape_roll.png",
+      "width": 432,
+      "height": 404,
+      "anchorX": 0.48,
+      "anchorY": 0.52,
+      "scale": 0.32,
+      "rotation": -6,
+      "zIndex": 26,
+      "bodyCompatibility": [
+        "body.cat"
+      ],
+      "animationProfile": "spin-slow",
+      "tags": [
+        "repair",
+        "adhesive",
+        "reattach"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "part.trinket.ribbon_knot": {
+      "id": "part.trinket.ribbon_knot",
+      "displayName": "Ribbon Knot",
+      "category": "part",
+      "slot": "trinket",
+      "file": "/assets/parts/trinket/ribbon_knot.png",
+      "fallbackFile": "/assets/placeholders/trinket.png",
+      "referenceFile": "/assets/references/part_ribbon.png",
+      "width": 468,
+      "height": 324,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 0.3,
+      "rotation": -4,
+      "zIndex": 34,
+      "bodyCompatibility": [
+        "body.cat"
+      ],
+      "animationProfile": "sway",
+      "tags": [
+        "speed",
+        "drift",
+        "red"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "part.trinket.eye_sticker": {
+      "id": "part.trinket.eye_sticker",
+      "displayName": "Eye Sticker",
+      "category": "part",
+      "slot": "trinket",
+      "file": "/assets/parts/trinket/eye_sticker.png",
+      "fallbackFile": "/assets/placeholders/trinket.png",
+      "referenceFile": "/assets/references/part_eye_sticker.png",
+      "width": 344,
+      "height": 344,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 0.19,
+      "rotation": 8,
+      "zIndex": 34,
+      "bodyCompatibility": [
+        "body.cat"
+      ],
+      "animationProfile": "jitter",
+      "tags": [
+        "insight",
+        "foresee",
+        "sticker"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "part.trinket.bread_patch": {
+      "id": "part.trinket.bread_patch",
+      "displayName": "Bread Patch",
+      "category": "part",
+      "slot": "trinket",
+      "file": "/assets/parts/trinket/bread_patch.png",
+      "fallbackFile": "/assets/placeholders/trinket.png",
+      "referenceFile": "/assets/references/part_patchbread.png",
+      "width": 448,
+      "height": 312,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 0.24,
+      "rotation": -8,
+      "zIndex": 34,
+      "bodyCompatibility": [
+        "body.cat"
+      ],
+      "animationProfile": "soft-bounce",
+      "tags": [
+        "mend",
+        "heal",
+        "bread"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "enemy.pencil_rat": {
+      "id": "enemy.pencil_rat",
+      "displayName": "Pencil Rat",
+      "category": "enemy",
+      "file": "/assets/enemies/pencil_rat.png",
+      "fallbackFile": "/assets/placeholders/enemy.png",
+      "referenceFile": "/assets/references/enemy_pencil_rat.png",
+      "width": 660,
+      "height": 680,
+      "anchorX": 0.5,
+      "anchorY": 1,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 20,
+      "animationProfile": "jitter",
+      "visualBounds": {
+        "x": 0.12,
+        "y": 0.1,
+        "w": 0.72,
+        "h": 0.85
+      },
+      "tags": [
+        "scavenger",
+        "glue-thief"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "enemy.tape_spider": {
+      "id": "enemy.tape_spider",
+      "displayName": "Tape Spider",
+      "category": "enemy",
+      "file": "/assets/enemies/tape_spider.png",
+      "fallbackFile": "/assets/placeholders/enemy.png",
+      "referenceFile": "/assets/references/enemy_tape_spider.png",
+      "width": 732,
+      "height": 600,
+      "anchorX": 0.5,
+      "anchorY": 1,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 20,
+      "animationProfile": "sway",
+      "visualBounds": {
+        "x": 0.14,
+        "y": 0.1,
+        "w": 0.72,
+        "h": 0.82
+      },
+      "tags": [
+        "bind",
+        "ink",
+        "nest"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "enemy.scissor_crow": {
+      "id": "enemy.scissor_crow",
+      "displayName": "Scissor Crow",
+      "category": "enemy",
+      "file": "/assets/enemies/scissor_crow.png",
+      "fallbackFile": "/assets/placeholders/enemy.png",
+      "referenceFile": "/assets/references/enemy_scissor_crow.png",
+      "width": 684,
+      "height": 644,
+      "anchorX": 0.5,
+      "anchorY": 1,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 20,
+      "animationProfile": "soft-bounce",
+      "visualBounds": {
+        "x": 0.12,
+        "y": 0.08,
+        "w": 0.76,
+        "h": 0.86
+      },
+      "tags": [
+        "elite",
+        "peel",
+        "raider"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "enemy.clip_moth": {
+      "id": "enemy.clip_moth",
+      "displayName": "Clip Moth",
+      "category": "enemy",
+      "file": "/assets/enemies/clip_moth.png",
+      "fallbackFile": "/assets/placeholders/enemy.png",
+      "width": 640,
+      "height": 524,
+      "anchorX": 0.5,
+      "anchorY": 1,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 20,
+      "animationProfile": "float",
+      "visualBounds": {
+        "x": 0.08,
+        "y": 0.14,
+        "w": 0.84,
+        "h": 0.72
+      },
+      "tags": [
+        "frazzle",
+        "dust",
+        "flier"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "bg.desk": {
+      "id": "bg.desk",
+      "displayName": "Desk & Notebook",
+      "category": "background",
+      "file": "/assets/backgrounds/desk.png",
+      "fallbackFile": "/assets/placeholders/generic.png",
+      "referenceFile": "/assets/references/stage_bg_base.png",
+      "width": 1600,
+      "height": 900,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 0,
+      "animationProfile": "static",
+      "tags": [
+        "stage",
+        "paper"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "bg.nest": {
+      "id": "bg.nest",
+      "displayName": "Draftboard Nest",
+      "category": "background",
+      "file": "/assets/backgrounds/nest.png",
+      "fallbackFile": "/assets/backgrounds/desk.png",
+      "referenceFile": "/assets/references/stage_bg_base.png",
+      "width": 1600,
+      "height": 900,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 0,
+      "animationProfile": "static",
+      "tags": [
+        "stage",
+        "boss",
+        "web"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "prop.pencil_cup": {
+      "id": "prop.pencil_cup",
+      "displayName": "Pencil Cup",
+      "category": "prop",
+      "file": "/assets/props/pencil_cup.png",
+      "fallbackFile": "/assets/placeholders/generic.png",
+      "referenceFile": "/assets/references/prop_pencilcup_left.png",
+      "width": 336,
+      "height": 576,
+      "anchorX": 0.5,
+      "anchorY": 1,
+      "scale": 1,
+      "rotation": -3,
+      "zIndex": 10,
+      "animationProfile": "static",
+      "tags": [
+        "desk"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "prop.torn_note": {
+      "id": "prop.torn_note",
+      "displayName": "Torn Note",
+      "category": "prop",
+      "file": "/assets/props/torn_note.png",
+      "fallbackFile": "/assets/placeholders/generic.png",
+      "referenceFile": "/assets/references/prop_tornpaper_right.png",
+      "width": 472,
+      "height": 548,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 6,
+      "zIndex": 10,
+      "animationProfile": "static",
+      "tags": [
+        "desk"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "prop.clip_pile": {
+      "id": "prop.clip_pile",
+      "displayName": "Clip Pile",
+      "category": "prop",
+      "file": "/assets/props/clip_pile.png",
+      "fallbackFile": "/assets/placeholders/generic.png",
+      "width": 488,
+      "height": 312,
+      "anchorX": 0.5,
+      "anchorY": 1,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 10,
+      "animationProfile": "static",
+      "tags": [
+        "desk"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "prop.tape_dispenser": {
+      "id": "prop.tape_dispenser",
+      "displayName": "Tape Dispenser",
+      "category": "prop",
+      "file": "/assets/props/tape_dispenser.png",
+      "fallbackFile": "/assets/placeholders/generic.png",
+      "width": 512,
+      "height": 380,
+      "anchorX": 0.5,
+      "anchorY": 1,
+      "scale": 1,
+      "rotation": -2,
+      "zIndex": 10,
+      "animationProfile": "static",
+      "tags": [
+        "desk",
+        "shop"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "ui.clip": {
+      "id": "ui.clip",
+      "displayName": "Paper Clip",
+      "category": "ui",
+      "file": "/assets/ui/clip.png",
+      "fallbackFile": "/assets/placeholders/generic.png",
+      "width": 240,
+      "height": 380,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 60,
+      "animationProfile": "static",
+      "tags": [
+        "decor"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "ui.tape_strip": {
+      "id": "ui.tape_strip",
+      "displayName": "Tape Strip",
+      "category": "ui",
+      "file": "/assets/ui/tape_strip.png",
+      "fallbackFile": "/assets/placeholders/generic.png",
+      "width": 480,
+      "height": 180,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 60,
+      "animationProfile": "static",
+      "tags": [
+        "decor"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "ui.tag": {
+      "id": "ui.tag",
+      "displayName": "Paper Tag",
+      "category": "ui",
+      "file": "/assets/ui/tag.png",
+      "fallbackFile": "/assets/placeholders/generic.png",
+      "referenceFile": "/assets/references/prop_hold_card.png",
+      "width": 520,
+      "height": 260,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 60,
+      "animationProfile": "static",
+      "tags": [
+        "decor"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "icon.status.focus": {
+      "id": "icon.status.focus",
+      "displayName": "Focus icon",
+      "category": "icon",
+      "file": "/assets/ui/status_focus.png",
+      "fallbackFile": "/assets/placeholders/generic.png",
+      "width": 192,
+      "height": 192,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 50,
+      "animationProfile": "static",
+      "tags": [
+        "status",
+        "focus"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "icon.status.drift": {
+      "id": "icon.status.drift",
+      "displayName": "Drift icon",
+      "category": "icon",
+      "file": "/assets/ui/status_drift.png",
+      "fallbackFile": "/assets/placeholders/generic.png",
+      "width": 192,
+      "height": 192,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 50,
+      "animationProfile": "static",
+      "tags": [
+        "status",
+        "drift"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "icon.status.bind": {
+      "id": "icon.status.bind",
+      "displayName": "Bind icon",
+      "category": "icon",
+      "file": "/assets/ui/status_bind.png",
+      "fallbackFile": "/assets/placeholders/generic.png",
+      "width": 192,
+      "height": 192,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 50,
+      "animationProfile": "static",
+      "tags": [
+        "status",
+        "bind"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "icon.status.haste": {
+      "id": "icon.status.haste",
+      "displayName": "Haste icon",
+      "category": "icon",
+      "file": "/assets/ui/status_haste.png",
+      "fallbackFile": "/assets/placeholders/generic.png",
+      "width": 192,
+      "height": 192,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 50,
+      "animationProfile": "static",
+      "tags": [
+        "status",
+        "haste"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "icon.status.pinned": {
+      "id": "icon.status.pinned",
+      "displayName": "Pinned icon",
+      "category": "icon",
+      "file": "/assets/ui/status_pinned.png",
+      "fallbackFile": "/assets/placeholders/generic.png",
+      "width": 192,
+      "height": 192,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 50,
+      "animationProfile": "static",
+      "tags": [
+        "status",
+        "pinned"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "icon.status.fragile": {
+      "id": "icon.status.fragile",
+      "displayName": "Fragile icon",
+      "category": "icon",
+      "file": "/assets/ui/status_fragile.png",
+      "fallbackFile": "/assets/placeholders/generic.png",
+      "width": 192,
+      "height": 192,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 50,
+      "animationProfile": "static",
+      "tags": [
+        "status",
+        "fragile"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "icon.status.frazzle": {
+      "id": "icon.status.frazzle",
+      "displayName": "Frazzle icon",
+      "category": "icon",
+      "file": "/assets/ui/status_frazzle.png",
+      "fallbackFile": "/assets/placeholders/generic.png",
+      "width": 192,
+      "height": 192,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 50,
+      "animationProfile": "static",
+      "tags": [
+        "status",
+        "frazzle"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "icon.status.ink": {
+      "id": "icon.status.ink",
+      "displayName": "Ink Tide icon",
+      "category": "icon",
+      "file": "/assets/ui/status_ink.png",
+      "fallbackFile": "/assets/placeholders/generic.png",
+      "width": 192,
+      "height": 192,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 50,
+      "animationProfile": "static",
+      "tags": [
+        "status",
+        "ink"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "icon.status.block": {
+      "id": "icon.status.block",
+      "displayName": "Block icon",
+      "category": "icon",
+      "file": "/assets/ui/status_block.png",
+      "fallbackFile": "/assets/placeholders/generic.png",
+      "width": 192,
+      "height": 192,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 50,
+      "animationProfile": "static",
+      "tags": [
+        "status",
+        "block"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "icon.status.glue": {
+      "id": "icon.status.glue",
+      "displayName": "Glue icon",
+      "category": "icon",
+      "file": "/assets/ui/status_glue.png",
+      "fallbackFile": "/assets/placeholders/generic.png",
+      "width": 192,
+      "height": 192,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 50,
+      "animationProfile": "static",
+      "tags": [
+        "status",
+        "glue"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "icon.status.peel": {
+      "id": "icon.status.peel",
+      "displayName": "Peel icon",
+      "category": "icon",
+      "file": "/assets/ui/status_peel.png",
+      "fallbackFile": "/assets/placeholders/generic.png",
+      "width": 192,
+      "height": 192,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 50,
+      "animationProfile": "static",
+      "tags": [
+        "status",
+        "peel"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "fx.scrap": {
+      "id": "fx.scrap",
+      "displayName": "Paper Scrap",
+      "category": "effect",
+      "file": "/assets/effects/scrap.png",
+      "fallbackFile": "/assets/placeholders/generic.png",
+      "width": 184,
+      "height": 152,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 70,
+      "animationProfile": "static",
+      "tags": [
+        "effect",
+        "scrap"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "fx.slash": {
+      "id": "fx.slash",
+      "displayName": "Slash Arc",
+      "category": "effect",
+      "file": "/assets/effects/slash.png",
+      "fallbackFile": "/assets/placeholders/generic.png",
+      "width": 360,
+      "height": 225,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 70,
+      "animationProfile": "static",
+      "tags": [
+        "effect",
+        "slash"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "fx.spark": {
+      "id": "fx.spark",
+      "displayName": "Spark",
+      "category": "effect",
+      "file": "/assets/effects/spark.png",
+      "fallbackFile": "/assets/placeholders/generic.png",
+      "width": 360,
+      "height": 360,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 70,
+      "animationProfile": "static",
+      "tags": [
+        "effect",
+        "spark"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "fx.impact": {
+      "id": "fx.impact",
+      "displayName": "Impact Burst",
+      "category": "effect",
+      "file": "/assets/effects/impact.png",
+      "fallbackFile": "/assets/placeholders/generic.png",
+      "width": 360,
+      "height": 360,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 70,
+      "animationProfile": "static",
+      "tags": [
+        "effect",
+        "impact"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "fx.patch": {
+      "id": "fx.patch",
+      "displayName": "Patch Strip",
+      "category": "effect",
+      "file": "/assets/effects/patch.png",
+      "fallbackFile": "/assets/placeholders/generic.png",
+      "width": 360,
+      "height": 225,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 70,
+      "animationProfile": "static",
+      "tags": [
+        "effect",
+        "patch"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "ph.head": {
+      "id": "ph.head",
+      "displayName": "Head placeholder",
+      "category": "placeholder",
+      "file": "/assets/placeholders/head.png",
+      "width": 480,
+      "height": 440,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 20,
+      "animationProfile": "static",
+      "tags": [
+        "placeholder"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "ph.hand": {
+      "id": "ph.hand",
+      "displayName": "Hand placeholder",
+      "category": "placeholder",
+      "file": "/assets/placeholders/hand.png",
+      "width": 440,
+      "height": 520,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 20,
+      "animationProfile": "static",
+      "tags": [
+        "placeholder"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "ph.core": {
+      "id": "ph.core",
+      "displayName": "Core placeholder",
+      "category": "placeholder",
+      "file": "/assets/placeholders/core.png",
+      "width": 420,
+      "height": 400,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 20,
+      "animationProfile": "static",
+      "tags": [
+        "placeholder"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "ph.trinket": {
+      "id": "ph.trinket",
+      "displayName": "Trinket placeholder",
+      "category": "placeholder",
+      "file": "/assets/placeholders/trinket.png",
+      "width": 460,
+      "height": 300,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 20,
+      "animationProfile": "static",
+      "tags": [
+        "placeholder"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "ph.body": {
+      "id": "ph.body",
+      "displayName": "Body placeholder",
+      "category": "placeholder",
+      "file": "/assets/placeholders/body.png",
+      "width": 800,
+      "height": 940,
+      "anchorX": 0.5,
+      "anchorY": 1,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 20,
+      "animationProfile": "static",
+      "tags": [
+        "placeholder"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "ph.enemy": {
+      "id": "ph.enemy",
+      "displayName": "Enemy placeholder",
+      "category": "placeholder",
+      "file": "/assets/placeholders/enemy.png",
+      "width": 640,
+      "height": 640,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 20,
+      "animationProfile": "static",
+      "tags": [
+        "placeholder"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "ph.generic": {
+      "id": "ph.generic",
+      "displayName": "Generic placeholder",
+      "category": "placeholder",
+      "file": "/assets/placeholders/generic.png",
+      "width": 400,
+      "height": 400,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 20,
+      "animationProfile": "static",
+      "tags": [
+        "placeholder"
+      ],
+      "license": "CC0-1.0 (authored for this repository)",
+      "source": "scripts/sprite-sources.mjs — hand-authored SVG, drawn against the v0.8 reference sheet",
+      "status": "placeholder"
+    },
+    "ref.stage": {
+      "id": "ref.stage",
+      "displayName": "Reference — Stage screenshot",
+      "category": "reference",
+      "file": "/assets/references/stage_bg_base.png",
+      "width": 0,
+      "height": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 0,
+      "animationProfile": "static",
+      "tags": [
+        "reference",
+        "v0.8"
+      ],
+      "license": "Unknown — inherited from the v0.8 upload. Reference only, not shipped in game.",
+      "source": "assets/source/reference/legacy-atlas-v0.8.webp (sliced by scripts/extract-reference.mjs)",
+      "status": "reference"
+    },
+    "ref.hero_card": {
+      "id": "ref.hero_card",
+      "displayName": "Reference — Hero card",
+      "category": "reference",
+      "file": "/assets/references/hero_full.png",
+      "width": 0,
+      "height": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 0,
+      "animationProfile": "static",
+      "tags": [
+        "reference",
+        "v0.8"
+      ],
+      "license": "Unknown — inherited from the v0.8 upload. Reference only, not shipped in game.",
+      "source": "assets/source/reference/legacy-atlas-v0.8.webp (sliced by scripts/extract-reference.mjs)",
+      "status": "reference"
+    },
+    "ref.enemy_rat": {
+      "id": "ref.enemy_rat",
+      "displayName": "Reference — Pencil Rat",
+      "category": "reference",
+      "file": "/assets/references/enemy_pencil_rat.png",
+      "width": 0,
+      "height": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 0,
+      "animationProfile": "static",
+      "tags": [
+        "reference",
+        "v0.8"
+      ],
+      "license": "Unknown — inherited from the v0.8 upload. Reference only, not shipped in game.",
+      "source": "assets/source/reference/legacy-atlas-v0.8.webp (sliced by scripts/extract-reference.mjs)",
+      "status": "reference"
+    },
+    "ref.enemy_spider": {
+      "id": "ref.enemy_spider",
+      "displayName": "Reference — Tape Spider",
+      "category": "reference",
+      "file": "/assets/references/enemy_tape_spider.png",
+      "width": 0,
+      "height": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 0,
+      "animationProfile": "static",
+      "tags": [
+        "reference",
+        "v0.8"
+      ],
+      "license": "Unknown — inherited from the v0.8 upload. Reference only, not shipped in game.",
+      "source": "assets/source/reference/legacy-atlas-v0.8.webp (sliced by scripts/extract-reference.mjs)",
+      "status": "reference"
+    },
+    "ref.enemy_crow": {
+      "id": "ref.enemy_crow",
+      "displayName": "Reference — Scissor Crow",
+      "category": "reference",
+      "file": "/assets/references/enemy_scissor_crow.png",
+      "width": 0,
+      "height": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 0,
+      "animationProfile": "static",
+      "tags": [
+        "reference",
+        "v0.8"
+      ],
+      "license": "Unknown — inherited from the v0.8 upload. Reference only, not shipped in game.",
+      "source": "assets/source/reference/legacy-atlas-v0.8.webp (sliced by scripts/extract-reference.mjs)",
+      "status": "reference"
+    },
+    "ref.toast": {
+      "id": "ref.toast",
+      "displayName": "Reference — Toast head crop",
+      "category": "reference",
+      "file": "/assets/references/part_toast.png",
+      "width": 0,
+      "height": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 0,
+      "animationProfile": "static",
+      "tags": [
+        "reference",
+        "v0.8"
+      ],
+      "license": "Unknown — inherited from the v0.8 upload. Reference only, not shipped in game.",
+      "source": "assets/source/reference/legacy-atlas-v0.8.webp (sliced by scripts/extract-reference.mjs)",
+      "status": "reference"
+    },
+    "ref.scissors": {
+      "id": "ref.scissors",
+      "displayName": "Reference — Scissors crop",
+      "category": "reference",
+      "file": "/assets/references/part_scissors.png",
+      "width": 0,
+      "height": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 0,
+      "animationProfile": "static",
+      "tags": [
+        "reference",
+        "v0.8"
+      ],
+      "license": "Unknown — inherited from the v0.8 upload. Reference only, not shipped in game.",
+      "source": "assets/source/reference/legacy-atlas-v0.8.webp (sliced by scripts/extract-reference.mjs)",
+      "status": "reference"
+    },
+    "ref.umbrella": {
+      "id": "ref.umbrella",
+      "displayName": "Reference — Umbrella crop",
+      "category": "reference",
+      "file": "/assets/references/part_umbrella.png",
+      "width": 0,
+      "height": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 0,
+      "animationProfile": "static",
+      "tags": [
+        "reference",
+        "v0.8"
+      ],
+      "license": "Unknown — inherited from the v0.8 upload. Reference only, not shipped in game.",
+      "source": "assets/source/reference/legacy-atlas-v0.8.webp (sliced by scripts/extract-reference.mjs)",
+      "status": "reference"
+    },
+    "ref.spear": {
+      "id": "ref.spear",
+      "displayName": "Reference — Pencil spear crop",
+      "category": "reference",
+      "file": "/assets/references/part_spear.png",
+      "width": 0,
+      "height": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 0,
+      "animationProfile": "static",
+      "tags": [
+        "reference",
+        "v0.8"
+      ],
+      "license": "Unknown — inherited from the v0.8 upload. Reference only, not shipped in game.",
+      "source": "assets/source/reference/legacy-atlas-v0.8.webp (sliced by scripts/extract-reference.mjs)",
+      "status": "reference"
+    },
+    "ref.bomb": {
+      "id": "ref.bomb",
+      "displayName": "Reference — Bomb belly crop",
+      "category": "reference",
+      "file": "/assets/references/part_bomb.png",
+      "width": 0,
+      "height": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 0,
+      "animationProfile": "static",
+      "tags": [
+        "reference",
+        "v0.8"
+      ],
+      "license": "Unknown — inherited from the v0.8 upload. Reference only, not shipped in game.",
+      "source": "assets/source/reference/legacy-atlas-v0.8.webp (sliced by scripts/extract-reference.mjs)",
+      "status": "reference"
+    },
+    "ref.coffee": {
+      "id": "ref.coffee",
+      "displayName": "Reference — Coffee mug crop",
+      "category": "reference",
+      "file": "/assets/references/part_coffee.png",
+      "width": 0,
+      "height": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 0,
+      "animationProfile": "static",
+      "tags": [
+        "reference",
+        "v0.8"
+      ],
+      "license": "Unknown — inherited from the v0.8 upload. Reference only, not shipped in game.",
+      "source": "assets/source/reference/legacy-atlas-v0.8.webp (sliced by scripts/extract-reference.mjs)",
+      "status": "reference"
+    },
+    "ref.tape": {
+      "id": "ref.tape",
+      "displayName": "Reference — Tape roll crop",
+      "category": "reference",
+      "file": "/assets/references/part_tape_roll.png",
+      "width": 0,
+      "height": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 0,
+      "animationProfile": "static",
+      "tags": [
+        "reference",
+        "v0.8"
+      ],
+      "license": "Unknown — inherited from the v0.8 upload. Reference only, not shipped in game.",
+      "source": "assets/source/reference/legacy-atlas-v0.8.webp (sliced by scripts/extract-reference.mjs)",
+      "status": "reference"
+    },
+    "ref.ribbon": {
+      "id": "ref.ribbon",
+      "displayName": "Reference — Ribbon crop",
+      "category": "reference",
+      "file": "/assets/references/part_ribbon.png",
+      "width": 0,
+      "height": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 0,
+      "animationProfile": "static",
+      "tags": [
+        "reference",
+        "v0.8"
+      ],
+      "license": "Unknown — inherited from the v0.8 upload. Reference only, not shipped in game.",
+      "source": "assets/source/reference/legacy-atlas-v0.8.webp (sliced by scripts/extract-reference.mjs)",
+      "status": "reference"
+    },
+    "ref.eye": {
+      "id": "ref.eye",
+      "displayName": "Reference — Eye sticker crop",
+      "category": "reference",
+      "file": "/assets/references/part_eye_sticker.png",
+      "width": 0,
+      "height": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 0,
+      "animationProfile": "static",
+      "tags": [
+        "reference",
+        "v0.8"
+      ],
+      "license": "Unknown — inherited from the v0.8 upload. Reference only, not shipped in game.",
+      "source": "assets/source/reference/legacy-atlas-v0.8.webp (sliced by scripts/extract-reference.mjs)",
+      "status": "reference"
+    },
+    "ref.ghost": {
+      "id": "ref.ghost",
+      "displayName": "Reference — Ghost charm crop",
+      "category": "reference",
+      "file": "/assets/references/part_ghost_charm.png",
+      "width": 0,
+      "height": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 0,
+      "animationProfile": "static",
+      "tags": [
+        "reference",
+        "v0.8"
+      ],
+      "license": "Unknown — inherited from the v0.8 upload. Reference only, not shipped in game.",
+      "source": "assets/source/reference/legacy-atlas-v0.8.webp (sliced by scripts/extract-reference.mjs)",
+      "status": "reference"
+    },
+    "ref.patchbread": {
+      "id": "ref.patchbread",
+      "displayName": "Reference — Bread patch crop",
+      "category": "reference",
+      "file": "/assets/references/part_patchbread.png",
+      "width": 0,
+      "height": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 0,
+      "animationProfile": "static",
+      "tags": [
+        "reference",
+        "v0.8"
+      ],
+      "license": "Unknown — inherited from the v0.8 upload. Reference only, not shipped in game.",
+      "source": "assets/source/reference/legacy-atlas-v0.8.webp (sliced by scripts/extract-reference.mjs)",
+      "status": "reference"
+    },
+    "ref.boxshell": {
+      "id": "ref.boxshell",
+      "displayName": "Reference — Box shell crop",
+      "category": "reference",
+      "file": "/assets/references/part_box_shell.png",
+      "width": 0,
+      "height": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 0,
+      "animationProfile": "static",
+      "tags": [
+        "reference",
+        "v0.8"
+      ],
+      "license": "Unknown — inherited from the v0.8 upload. Reference only, not shipped in game.",
+      "source": "assets/source/reference/legacy-atlas-v0.8.webp (sliced by scripts/extract-reference.mjs)",
+      "status": "reference"
+    },
+    "ref.pencilcup": {
+      "id": "ref.pencilcup",
+      "displayName": "Reference — Pencil cup prop",
+      "category": "reference",
+      "file": "/assets/references/prop_pencilcup_left.png",
+      "width": 0,
+      "height": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 0,
+      "animationProfile": "static",
+      "tags": [
+        "reference",
+        "v0.8"
+      ],
+      "license": "Unknown — inherited from the v0.8 upload. Reference only, not shipped in game.",
+      "source": "assets/source/reference/legacy-atlas-v0.8.webp (sliced by scripts/extract-reference.mjs)",
+      "status": "reference"
+    },
+    "ref.holdcard": {
+      "id": "ref.holdcard",
+      "displayName": "Reference — Press-to-hold UI",
+      "category": "reference",
+      "file": "/assets/references/prop_hold_card.png",
+      "width": 0,
+      "height": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "scale": 1,
+      "rotation": 0,
+      "zIndex": 0,
+      "animationProfile": "static",
+      "tags": [
+        "reference",
+        "v0.8"
+      ],
+      "license": "Unknown — inherited from the v0.8 upload. Reference only, not shipped in game.",
+      "source": "assets/source/reference/legacy-atlas-v0.8.webp (sliced by scripts/extract-reference.mjs)",
+      "status": "reference"
+    }
+  }
+}
