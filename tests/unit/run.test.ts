@@ -198,8 +198,15 @@ describe('battle results and progression', () => {
     expect(summary.scrapGained).toBe(9);
     expect(after.scrap).toBe(run.scrap + 9);
     expect(after.battlesWon).toBe(1);
-    expect(after.carry.hp).toBe(10 + BALANCE.run.carryHpRefund);
-    expect(after.carry.glue).toBe(4 + BALANCE.run.carryGlueRefund);
+    // Recovery is flat + a share of the build's own maximum, so a tanky beast
+    // is not punished for having a bigger bar to refill.
+    const build = computeBuild(run.assembly, { relics: run.relics });
+    expect(after.carry.hp).toBe(
+      Math.min(build.maxHp, 10 + BALANCE.run.carryHpRefund + Math.round(build.maxHp * BALANCE.run.carryHpRefundRatio)),
+    );
+    expect(after.carry.glue).toBe(
+      Math.min(build.maxGlue, 4 + BALANCE.run.carryGlueRefund + Math.round(build.maxGlue * BALANCE.run.carryGlueRefundRatio)),
+    );
     expect(after.history.at(-1)?.outcome).toBe('cleared');
     expect(after.status).toBe('active');
   });

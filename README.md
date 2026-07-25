@@ -23,7 +23,7 @@
   HP/Glue 캐리오버, localStorage 이어하기
 - **에셋** — 카탈로그 68종, 논리 ID 기반, 누락 시 fallback, 자동 아틀라스 생성
 - **결정론** — 시드 RNG. 같은 seed + 같은 입력 = 같은 결과. `?seed=1234`로 고정 가능
-- **테스트** — 단위·통합 116개, E2E 15개
+- **테스트** — 단위·통합·컴포넌트 132개, E2E 15개, 밸런스 시뮬레이터
 
 전체 설계는 [`docs/00_MASTER_DEVELOPMENT_DOCUMENT.md`](docs/00_MASTER_DEVELOPMENT_DOCUMENT.md)에서 시작한다.
 
@@ -59,7 +59,7 @@ npm run preview      # http://127.0.0.1:4173
 
 ```bash
 npm run typecheck    # tsc --noEmit (strict)
-npm test             # vitest — 단위 + 통합
+npm test             # vitest — 단위 + 통합 + 컴포넌트
 npm run test:watch
 npm run test:e2e     # playwright (자동으로 build + preview 실행)
 ```
@@ -70,7 +70,7 @@ npm run test:e2e     # playwright (자동으로 build + preview 실행)
 PLAYWRIGHT_CHROMIUM_PATH=/opt/pw-browsers/chromium npm run test:e2e
 ```
 
-시각 검수 스크린샷 (1440×900, 1280×720 × 12화면):
+시각 검수 스크린샷 (1440×900 · 1280×720 · 390×844 × 12화면):
 
 ```bash
 npm run preview
@@ -81,6 +81,12 @@ node scripts/shoot.mjs screenshots
 
 ```bash
 node scripts/preview-assembly.mjs
+```
+
+밸런스 시뮬레이션 (전체 런을 배치로 자동 플레이):
+
+```bash
+npm run simulate -- --runs 40 --encounters
 ```
 
 ---
@@ -156,8 +162,9 @@ legacy/v0.8/          v0.8 단일 HTML 빌드 (참조용 보존)
 - 스프라이트 48종이 `placeholder` 상태다. 손으로 저작한 벡터이며 최종 아트가 아니다
 - 적 3종은 원본 레퍼런스에서 배경 분리에 실패해 새로 저작했다
   (사유는 `scripts/build-reference-cutouts.mjs` 주석)
-- 밸런싱 1차 미완, 사운드 없음, 튜토리얼 없음
-- 모바일 레이아웃은 성립하지만 전용 UX 미설계. 터치에서 파츠 호버 미리보기가 동작하지 않는다
+- 밸런싱 1차 완료(`npm run simulate`)했으나 전투 길이가 목표의 2배이고
+  순수 방어 빌드는 승률 0 % — `docs/02_GAME_DESIGN.md` §8.4
+- 사운드 없음, 튜토리얼 없음
 - 1280×720에서 액션 바 일부가 접힘선 아래 — 캐릭터 크기 유지를 위한 의도적 선택
 - UI 문구가 한국어로 하드코딩되어 있다 (게임 데이터는 분리됨)
 - 레퍼런스 시트의 라이선스가 불명이다. 배포 전 확인이 필요하다
@@ -167,7 +174,7 @@ legacy/v0.8/          v0.8 단일 HTML 빌드 (참조용 보존)
 
 ## 로드맵
 
-**P0** 최종 아트 교체 · 밸런싱 1차 · 모바일 세로 레이아웃
+**P0** 최종 아트 교체(`docs/11_ART_DIRECTION_AND_ASSET_BRIEF.md`) · 밸런싱 2차
 **P1** 콘텐츠 확장(파츠 24, 적 8, 이벤트 15, 보스 2) · 튜토리얼 · 사운드 · 시각 회귀 테스트
 **P2** 메타 해금 · 도감 · 난이도 단계 · 분기 루트 그래프 · 로컬라이제이션
 

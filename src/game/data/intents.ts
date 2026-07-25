@@ -136,7 +136,7 @@ export const INTENTS: Record<string, IntentDef> = {
     blockable: true,
     piercing: false,
     flavour: '단숨에 덮친다.',
-    effects: [{ kind: 'damage', amount: 7 }],
+    effects: [{ kind: 'damage', amount: 6 }],
   },
 
   // Scissor Crow
@@ -149,7 +149,7 @@ export const INTENTS: Record<string, IntentDef> = {
     piercing: false,
     flavour: '높은 곳에서 급강하한다.',
     effects: [
-      { kind: 'damage', amount: 8, bonus: { when: { kind: 'selfHasStatus', status: 'pinned' }, amount: 2 } },
+      { kind: 'damage', amount: 7, bonus: { when: { kind: 'selfHasStatus', status: 'pinned' }, amount: 2 } },
     ],
   },
   shearPluck: {
@@ -214,7 +214,7 @@ export const INTENTS: Record<string, IntentDef> = {
     piercing: true,
     flavour: '발톱이 방어를 무시하고 파고든다.',
     effects: [
-      { kind: 'damage', amount: 5, ignoreBlock: true },
+      { kind: 'damage', amount: 4, ignoreBlock: true },
       { kind: 'status', target: 'opponent', status: 'fragile', amount: 1 },
     ],
   },
@@ -265,7 +265,7 @@ export const INTENTS: Record<string, IntentDef> = {
     blockable: true,
     piercing: false,
     flavour: '얇은 날개 끝이 살을 벤다.',
-    effects: [{ kind: 'damage', amount: 6 }],
+    effects: [{ kind: 'damage', amount: 5 }],
   },
 };
 

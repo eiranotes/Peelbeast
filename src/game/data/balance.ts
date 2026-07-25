@@ -7,7 +7,7 @@ export const BALANCE = {
   /** Base action values before parts, passives and relics. */
   core: {
     guardBlock: 6,
-    repairHp: 3,
+    repairHp: 5,
     repairGlue: 7,
     pressGlue: 4,
     pressCooldown: 1,
@@ -49,7 +49,15 @@ export const BALANCE = {
   /** Run economy. */
   run: {
     startingScrap: 12,
+    /**
+     * Recovery after a won fight. A flat +4 could not keep up with cumulative
+     * damage across a 7-node run — simulation showed every build dying before
+     * the boss regardless of loadout. Winning now restores a share of max HP,
+     * which is what makes a whole run survivable.
+     */
+    carryHpRefundRatio: 0.34,
     carryHpRefund: 4,
+    carryGlueRefundRatio: 0.5,
     carryGlueRefund: 6,
     scrap: { combat: 9, elite: 14, boss: 20 },
     /** Applied when entering any node after the first. */
@@ -61,6 +69,14 @@ export const BALANCE = {
     phaseShiftBlock: 4,
     phaseShiftFury: 1,
     intentQueueLength: 3,
+    /**
+     * Fury is added to every hit and never decays, so without a ceiling a long
+     * fight compounds into an unwinnable spiral — simulation showed a 0% win
+     * rate before this cap existed.
+     */
+    maxFury: 2,
+    /** Share of max HP the player recovers when a boss changes phase. */
+    phaseShiftPlayerHeal: 0.25,
   },
 
   /** Presentation timings the battle view uses (ms). Engine never reads these. */

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  battleBuild,
   createBattle,
   resolvePlayerAction,
   resolveSkill,
@@ -181,7 +182,9 @@ describe('glue', () => {
     const b = battle();
     const after = resolveSkill(b, 'hand');
     expect(after.player.glue).toBe(b.player.glue - 3);
-    expect(after.player.slots.hand.cooldown).toBe(3);
+    // Scissor Flurry is cooldown 3; this loadout runs Toast + Coffee, so Warm
+    // Breakfast's discount of 1 applies.
+    expect(after.player.slots.hand.cooldown).toBe(3 - battleBuild(b).cooldownDiscount);
     expect(skillAvailability(after, 'hand').enabled).toBe(false);
   });
 });
@@ -388,5 +391,69 @@ describe('peel targeting', () => {
     }
     expect(seen.has('trinket')).toBe(false);
     expect(seen.size).toBeGreaterThan(0);
+  });
+});
+
+describe('regressions found in self-review', () => {
+  it('a cooldown discount actually shortens the cooldown a skill sets', () => {
+    // Warm Breakfast claimed "every skill starts 1 cooldown lower", but every
+    // skill already started at 0, so the synergy was a no-op that only wrote a
+    // log line. The discount now applies where cooldowns are set.
+    const plain = createBattle({
+      encounterId: 'rat',
+      assembly: createAssembly({ head: 'part.head.ghost_hood', core: 'part.core.coffee_cup' }),
+      relics: [],
+      seed: 5,
+    });
+    const warm = createBattle({
+      encounterId: 'rat',
+      assembly: createAssembly({ head: 'part.head.toast_helm', core: 'part.core.coffee_cup' }),
+      relics: [],
+      seed: 5,
+    });
+    expect(warm.player.slots.core.partId).toBe('part.core.coffee_cup');
+
+    const plainAfter = resolveSkill(plain, 'core');
+    const warmAfter = resolveSkill(warm, 'core');
+
+    // Coffee Overclock has cooldown 3; Warm Breakfast brings it back a turn sooner
+    expect(plainAfter.player.slots.core.cooldown).toBe(3);
+    expect(warmAfter.player.slots.core.cooldown).toBe(2);
+  });
+
+  it('a discount never pushes a cooldown below zero', () => {
+    const b = createBattle({
+      encounterId: 'rat',
+      assembly: createAssembly({ head: 'part.head.toast_helm', core: 'part.core.coffee_cup', trinket: 'part.trinket.ribbon_knot' }),
+      relics: [],
+      seed: 5,
+    });
+    const after = resolveSkill(b, 'trinket'); // Ribbon Jump, cooldown 2
+    expect(after.player.slots.trinket.cooldown).toBeGreaterThanOrEqual(0);
+  });
+
+  it('parts damaged before a fight start peeled AND the build reflects it', () => {
+    // Previously the store peeled the slot by hand without recalculating, so
+    // max hp still counted a part that was lying on the desk.
+    const intact = battle();
+    const damaged = battle({ damagedSlots: ['head'] });
+
+    expect(damaged.player.slots.head.peeled).toBe(true);
+    expect(damaged.player.floor.map((f) => f.slot)).toContain('head');
+    expect(damaged.player.maxHp).toBeLessThan(intact.player.maxHp);
+    expect(damaged.player.hp).toBeLessThanOrEqual(damaged.player.maxHp);
+    expect(skillAvailability(damaged, 'head').enabled).toBe(false);
+  });
+
+  it('Feather Burst shreds the defender’s block, not the attacker’s', () => {
+    let b = battle();
+    b.enemy.intents[0] = { key: 'k', intentId: 'featherBurst', bonusDamage: 0, weakened: 0 };
+    b = resolvePlayerAction(b, 'guard');
+    const enemyBlockBefore = b.enemy.block;
+    const playerBlockBefore = b.player.block;
+    b = resolveEnemyIntent(b);
+
+    expect(b.player.block).toBeLessThan(playerBlockBefore);
+    expect(b.enemy.block).toBe(enemyBlockBefore);
   });
 });

@@ -64,8 +64,9 @@ function dangerFor(damage: number, peels: boolean, maxHp: number): Danger {
 export function describeIntent(state: BattleState, instance: IntentInstance, revealed: boolean): IntentPreview {
   const intent = INTENTS[instance.intentId];
   const base = damageOf(intent.effects);
-  const perHitBonus = state.enemy.fury + instance.bonusDamage - instance.weakened;
-  const damage = base.hits > 0 ? Math.max(0, base.amount + perHitBonus * base.hits) : null;
+  // Fury and weakening apply once per intent, matching effectResolver.
+  const bonus = state.enemy.fury + instance.bonusDamage - instance.weakened;
+  const damage = base.hits > 0 ? Math.max(0, base.amount + bonus) : null;
 
   const statuses = intent.effects
     .filter((e): e is Extract<Effect, { kind: 'status' }> => e.kind === 'status')

@@ -91,7 +91,7 @@ describe('assembly — synergies', () => {
 
     const full = computeBuild(createAssembly({ head: 'part.head.toast_helm', core: 'part.core.coffee_cup' }));
     expect(full.activeSynergies.map((s) => s.id)).toContain('warm_breakfast');
-    expect(full.cooldownStart).toBe(1);
+    expect(full.cooldownDiscount).toBe(1);
   });
 
   it('breaks when one of its parts is peeled, and reports it as broken not absent', () => {
@@ -100,7 +100,7 @@ describe('assembly — synergies', () => {
 
     expect(broken.activeSynergies.map((s) => s.id)).not.toContain('warm_breakfast');
     expect(broken.brokenSynergies.map((s) => s.id)).toContain('warm_breakfast');
-    expect(broken.cooldownStart).toBe(0);
+    expect(broken.cooldownDiscount).toBe(0);
   });
 
   it('contributes rules as well as stats', () => {

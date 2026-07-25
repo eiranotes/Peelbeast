@@ -284,9 +284,11 @@ export function applyBattleResult(
     scrapGained = encounter?.scrapReward ?? BALANCE.run.scrap.combat;
     next.scrap += scrapGained;
     next.battlesWon += 1;
-    // small breather between fights so a run is not a single unbroken slide
-    next.carry.hp += BALANCE.run.carryHpRefund;
-    next.carry.glue += BALANCE.run.carryGlueRefund;
+    // Breather between fights. Proportional to the build's own maximum, so a
+    // tanky beast is not punished for having a bigger bar to refill.
+    const build = computeBuild(next.assembly, { relics: next.relics });
+    next.carry.hp += BALANCE.run.carryHpRefund + Math.round(build.maxHp * BALANCE.run.carryHpRefundRatio);
+    next.carry.glue += BALANCE.run.carryGlueRefund + Math.round(build.maxGlue * BALANCE.run.carryGlueRefundRatio);
     next.damagedSlots = [];
     next.history.push({
       index: next.nodeIndex,

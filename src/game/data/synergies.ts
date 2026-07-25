@@ -11,9 +11,9 @@ export const SYNERGIES: Record<string, SynergyDef> = {
   warm_breakfast: {
     id: 'warm_breakfast',
     name: 'Warm Breakfast',
-    desc: '토스트와 커피가 함께 있으면 모든 스킬이 쿨다운 1 낮은 상태로 전투를 시작한다.',
+    desc: '토스트와 커피가 함께 있으면 모든 스킬의 쿨다운이 1 짧아진다.',
     requires: ['part.head.toast_helm', 'part.core.coffee_cup'],
-    modifiers: { cooldownStart: 1, glue: 2 },
+    modifiers: { cooldownDiscount: 1, glue: 2 },
   },
   precision_draft: {
     id: 'precision_draft',

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useGame } from '@/app/gameStore';
 import { PARTS, partsForSlot } from '@/game/data/parts';
 import { SYNERGIES } from '@/game/data/synergies';
@@ -30,6 +30,17 @@ function Workshop({ run }: { run: NonNullable<ReturnType<typeof useGame>['run']>
   const { equip, enterCurrentNode, go } = useGame();
   const [activeSlot, setActiveSlot] = useState<PartSlot>('head');
   const [preview, setPreview] = useState<string | null>(null);
+  // Touch devices have no hover, so the before/after comparison was unreachable
+  // on a phone. There, the first tap previews and the second commits.
+  const [coarsePointer, setCoarsePointer] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(hover: none), (pointer: coarse)');
+    const sync = () => setCoarsePointer(mq.matches);
+    sync();
+    mq.addEventListener('change', sync);
+    return () => mq.removeEventListener('change', sync);
+  }, []);
 
   const build = useMemo(() => computeBuild(run.assembly, { relics: run.relics }), [run.assembly, run.relics]);
 
@@ -93,6 +104,20 @@ function Workshop({ run }: { run: NonNullable<ReturnType<typeof useGame>['run']>
           {preview && (
             <div className="workshop__preview-flag">
               미리보기 — {PARTS[preview]?.name}
+              {coarsePointer && (
+                <button
+                  type="button"
+                  className="btn btn--primary"
+                  onClick={() => {
+                    const part = PARTS[preview];
+                    if (part) equip(part.slot, part.id);
+                    setPreview(null);
+                  }}
+                  data-testid="preview-confirm"
+                >
+                  장착
+                </button>
+              )}
               <button type="button" className="btn btn--ghost" onClick={() => setPreview(null)}>
                 취소
               </button>
@@ -224,12 +249,16 @@ function Workshop({ run }: { run: NonNullable<ReturnType<typeof useGame>['run']>
                   key={part.id}
                   type="button"
                   className={`part-card${equipped ? ' is-equipped' : ''}${compat.ok ? '' : ' is-blocked'}`}
-                  onMouseEnter={() => !equipped && setPreview(part.id)}
-                  onMouseLeave={() => setPreview(null)}
-                  onFocus={() => !equipped && setPreview(part.id)}
-                  onBlur={() => setPreview(null)}
+                  onMouseEnter={() => !coarsePointer && !equipped && setPreview(part.id)}
+                  onMouseLeave={() => !coarsePointer && setPreview(null)}
+                  onFocus={() => !coarsePointer && !equipped && setPreview(part.id)}
+                  onBlur={() => !coarsePointer && setPreview(null)}
                   onClick={() => {
                     if (!compat.ok) return;
+                    if (coarsePointer && !equipped && preview !== part.id) {
+                      setPreview(part.id);
+                      return;
+                    }
                     equip(activeSlot, equipped ? null : part.id);
                     setPreview(null);
                   }}
@@ -242,7 +271,17 @@ function Workshop({ run }: { run: NonNullable<ReturnType<typeof useGame>['run']>
                   <span className="part-card__stats">
                     {statLine(part.stats)}
                   </span>
-                  <span className="part-card__state">{equipped ? '장착 중 · 클릭하면 해제' : compat.ok ? '클릭해서 장착' : compat.reason}</span>
+                  <span className="part-card__state">
+                    {equipped
+                      ? '장착 중 · 눌러서 해제'
+                      : !compat.ok
+                        ? compat.reason
+                        : coarsePointer
+                          ? preview === part.id
+                            ? '한 번 더 눌러 장착'
+                            : '눌러서 미리보기'
+                          : '클릭해서 장착'}
+                  </span>
                 </button>
               );
             })}

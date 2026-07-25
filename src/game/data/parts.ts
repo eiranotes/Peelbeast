@@ -10,7 +10,7 @@ export const BODIES: Record<string, BodyDef> = {
     id: 'body.cat',
     name: 'Peelbeast Cat',
     assetId: 'body.cat',
-    base: { hp: 32, glue: 24, atk: 3, spd: 8, peelResist: 0 },
+    base: { hp: 34, glue: 24, atk: 4, spd: 8, peelResist: 0 },
     slots: ['head', 'hand', 'core', 'trinket'],
   },
 };
@@ -172,7 +172,7 @@ export const PARTS: Record<string, PartDef> = {
     name: 'Umbrella Hook',
     desc: '우산형 보호구. 잉크와 속박에 강하다.',
     assetId: 'part.hand.umbrella_hook',
-    stats: { hp: 3, glue: 2 },
+    stats: { hp: 3, glue: 2, atk: 1 },
     active: {
       id: 'umbrellaBastion',
       name: 'Umbrella Bastion',

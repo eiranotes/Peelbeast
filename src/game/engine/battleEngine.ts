@@ -20,7 +20,7 @@ import { ALL_SLOTS, type BattleState, type FxEvent, type PlayerBattleState } fro
 import { applyEffects, reduceCooldowns } from './effectResolver';
 import { changeGlue, gainBlock, heal } from './damageResolver';
 import { applyStatus, clearStatus, consumeStatus, getStatus } from './statusResolver';
-import { currentBuild, currentRules, peeledSlots, reattachPart, recalculateBuild } from './peelResolver';
+import { currentBuild, currentRules, peelPart, peeledSlots, reattachPart, recalculateBuild } from './peelResolver';
 import { fillIntentQueue, checkOutcome, endPlayerTurn, resolveEnemyTurn, startPlayerTurn } from './turnResolver';
 import {
   basicAppliedStatuses,
@@ -49,6 +49,12 @@ export interface BattleSetup {
     startBlock?: number;
     startStatuses?: Partial<Record<StatusId, number>>;
   };
+  /**
+   * Slots damaged by an event, which begin the fight already peeled.
+   * Handled here rather than by the caller so the build is recalculated and
+   * every downstream rule sees the same state.
+   */
+  damagedSlots?: readonly PartSlot[];
 }
 
 function emptyPlayer(): PlayerBattleState {
@@ -86,7 +92,7 @@ export function createBattle(setup: BattleSetup): BattleState {
 
   const player = emptyPlayer();
   for (const slot of ALL_SLOTS) {
-    player.slots[slot] = { partId: setup.assembly.slots[slot], peeled: false, cooldown: build.cooldownStart > 0 ? 0 : 0 };
+    player.slots[slot] = { partId: setup.assembly.slots[slot], peeled: false, cooldown: 0 };
   }
   player.maxHp = build.maxHp;
   player.maxGlue = build.maxGlue;
@@ -138,21 +144,27 @@ export function createBattle(setup: BattleSetup): BattleState {
     if (amount) applyStatus(state, 'player', status as StatusId, amount);
   }
 
+  // Parts damaged before the fight start peeled. peelPart() recalculates the
+  // build, so max hp/glue reflect the loss instead of silently disagreeing.
+  for (const slot of setup.damagedSlots ?? []) {
+    if (state.player.slots[slot].partId) peelPart(state, slot, 'Damaged');
+  }
+
   fillIntentQueue(state);
-  startOfBattleTurn(state, build.cooldownStart);
+  startOfBattleTurn(state, build.cooldownDiscount);
   return state;
 }
 
 /** Turn 1 setup without incrementing the turn counter. */
-function startOfBattleTurn(state: BattleState, cooldownStart: number): void {
+function startOfBattleTurn(state: BattleState, cooldownDiscount: number): void {
   const rules = currentRules(state);
   for (const { status, amount } of rules
     .filter((r): r is Extract<typeof r, { kind: 'turnStartStatusIfEmpty' }> => r.kind === 'turnStartStatusIfEmpty')
     .map((r) => ({ status: r.status, amount: r.amount }))) {
     if (getStatus(state, 'player', status) === 0) applyStatus(state, 'player', status, amount);
   }
-  if (cooldownStart > 0) {
-    addLog(state, 'Warm Breakfast', `모든 스킬이 쿨다운 ${cooldownStart} 낮은 상태로 시작한다.`, 'player');
+  if (cooldownDiscount > 0) {
+    addLog(state, 'Warm Breakfast', `모든 스킬의 쿨다운이 ${cooldownDiscount} 짧아진다.`, 'player');
   }
 }
 
@@ -318,7 +330,8 @@ export function resolveSkill(state: BattleState, slot: PartSlot): BattleState {
     bonusDamage: firstSkillBonus,
   });
 
-  runtime.cooldown = skill.cooldown;
+  // Warm Breakfast and anything else granting a discount shortens every cooldown.
+  runtime.cooldown = Math.max(0, skill.cooldown - currentBuild(next).cooldownDiscount);
   next.player.usedSkill = true;
 
   if (!checkOutcome(next)) endPlayerTurn(next);

@@ -15,12 +15,15 @@ import { Sprite } from '../common/Sprite';
 import { IntentRail } from './IntentRail';
 import { ENEMY_REF, RefPhoto } from '../common/RefPhoto';
 
-const CORE_ACTIONS: Array<{ id: CoreActionId; name: string; icon: string; desc: string }> = [
-  { id: 'attack', name: 'Peel Strike', icon: 'fx.slash', desc: '기본 공격. ATK와 Focus로 계산된다.' },
-  { id: 'guard', name: 'Guard', icon: 'icon.status.block', desc: `Block ${BALANCE.core.guardBlock}. 박리 시도도 막는다.` },
-  { id: 'repair', name: 'Repair', icon: 'fx.patch', desc: `HP +${BALANCE.core.repairHp}, Glue +${BALANCE.core.repairGlue}, 파츠 1개 복구.` },
-  { id: 'press', name: 'Press', icon: 'icon.status.haste', desc: `쿨다운 −${BALANCE.core.pressCooldown}, Glue +${BALANCE.core.pressGlue}.` },
+const CORE_ACTIONS: Array<{ id: CoreActionId; name: string; icon: string; desc: string; key: string }> = [
+  { id: 'attack', name: 'Peel Strike', icon: 'fx.slash', desc: '기본 공격. ATK와 Focus로 계산된다.', key: '1' },
+  { id: 'guard', name: 'Guard', icon: 'icon.status.block', desc: `Block ${BALANCE.core.guardBlock}. 박리 시도도 막는다.`, key: '2' },
+  { id: 'repair', name: 'Repair', icon: 'fx.patch', desc: `HP +${BALANCE.core.repairHp}, Glue +${BALANCE.core.repairGlue}, 파츠 1개 복구.`, key: '3' },
+  { id: 'press', name: 'Press', icon: 'icon.status.haste', desc: `쿨다운 −${BALANCE.core.pressCooldown}, Glue +${BALANCE.core.pressGlue}.`, key: '4' },
 ];
+
+/** Slot → keyboard shortcut, in the same order the buttons appear. */
+const SLOT_KEY: Record<PartSlot, string> = { head: 'Q', hand: 'W', core: 'E', trinket: 'R' };
 
 /** Phase enemy id, used to pick the matching reference portrait. */
 function currentEnemyId(b: { encounterId: string; enemy: { phaseIndex: number } }): string {
@@ -146,6 +149,35 @@ function BattleView() {
   }, [b.fx, b]);
 
   const playerTurn = b.side === 'player' && b.outcome === 'ongoing';
+
+  /**
+   * Keyboard shortcuts. A turn-based fight is a lot of clicking otherwise, and
+   * the actions are real <button>s so this is additive, not a replacement.
+   */
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      const el = document.activeElement;
+      if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) return;
+      if (!playerTurn) return;
+
+      const core = CORE_ACTIONS.find((a) => a.key === e.key);
+      if (core) {
+        e.preventDefault();
+        act(core.id);
+        return;
+      }
+      const slot = (Object.keys(SLOT_KEY) as PartSlot[]).find(
+        (s) => SLOT_KEY[s].toLowerCase() === e.key.toLowerCase(),
+      );
+      if (slot && skills.find((v) => v.slot === slot)?.availability.enabled) {
+        e.preventDefault();
+        useSkill(slot);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [playerTurn, act, useSkill, skills]);
 
   return (
     <div className={`screen battle${hitStop ? ' is-hitstop' : ''}`} data-testid="battle-screen">
@@ -278,6 +310,7 @@ function BattleView() {
             <Sprite assetId={a.icon} className="action__icon" decorative />
             <strong>{a.name}</strong>
             <span>{a.desc}</span>
+            <kbd className="action__key">{a.key}</kbd>
           </button>
         ))}
 
@@ -297,6 +330,7 @@ function BattleView() {
             <em className="action__state">
               {s.peeled ? '박리됨' : s.availability.enabled ? `${slotName(s.slot)} · Glue ${s.skill?.glueCost ?? 0}` : s.availability.reason}
             </em>
+            <kbd className="action__key">{SLOT_KEY[s.slot]}</kbd>
           </button>
         ))}
       </div>

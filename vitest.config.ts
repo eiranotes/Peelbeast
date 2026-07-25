@@ -10,7 +10,13 @@ export default defineConfig({
   },
   test: {
     globals: true,
+    // Engine tests need no DOM; component tests opt in with
+    // `@vitest-environment jsdom` at the top of the file.
     environment: 'node',
-    include: ['tests/unit/**/*.test.ts', 'tests/integration/**/*.test.ts'],
+    include: [
+      'tests/unit/**/*.test.ts',
+      'tests/unit/**/*.test.tsx',
+      'tests/integration/**/*.test.ts',
+    ],
   },
 });

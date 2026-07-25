@@ -40,7 +40,7 @@ export interface BuildSummary {
   atk: number;
   spd: number;
   peelResist: number;
-  cooldownStart: number;
+  cooldownDiscount: number;
   skills: BuildSkill[];
   passives: BuildPassive[];
   /** Aggregated from active parts + active synergies + relics. */
@@ -106,7 +106,7 @@ export function computeBuild(assembly: AssemblyState, ctx: BuildContext = {}): B
     atk: body.base.atk,
     spd: body.base.spd,
     peelResist: body.base.peelResist,
-    cooldownStart: 0,
+    cooldownDiscount: 0,
   };
 
   const skills: BuildSkill[] = [];
@@ -155,7 +155,7 @@ export function computeBuild(assembly: AssemblyState, ctx: BuildContext = {}): B
     atk: Math.max(0, Math.round(totals.atk)),
     spd: Math.round(totals.spd),
     peelResist: Math.round(totals.peelResist),
-    cooldownStart: Math.max(0, Math.round(totals.cooldownStart)),
+    cooldownDiscount: Math.max(0, Math.round(totals.cooldownDiscount)),
     skills,
     passives,
     rules,

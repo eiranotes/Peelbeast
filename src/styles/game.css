@@ -1368,3 +1368,101 @@
   .title__origin { display: none; }
   .combatant__portrait { display: none; }
 }
+
+/* keyboard hint on action buttons */
+.action__key {
+  position: absolute;
+  top: 7px;
+  right: 8px;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 900;
+  line-height: 1;
+  padding: 3px 6px;
+  color: var(--ink-faint);
+  background: rgba(58, 43, 30, 0.09);
+  border: 1px solid rgba(58, 43, 30, 0.16);
+}
+.action:disabled .action__key {
+  opacity: 0.5;
+}
+/* a touch device has no keyboard to hint at */
+@media (hover: none), (pointer: coarse) {
+  .action__key { display: none; }
+}
+
+/* ── portrait phones ──────────────────────────────────────────────────────
+   Not a shrunken desktop: the stage keeps the two characters side by side and
+   large, while the vitals collapse to single-line strips and the action grid
+   becomes a two-column pad reachable with a thumb. */
+
+@media (max-width: 620px) {
+  .app__main { padding: 0 10px 16px; }
+  .app__bar { padding: 6px 10px; gap: 8px; }
+  .app__brand { font-size: 15px; letter-spacing: 0.12em; }
+  .app__nav .btn { padding: 5px 9px; font-size: 11px; }
+
+  .section-title { padding: 12px 2px 10px; }
+  .section-title h2 { font-size: 20px; }
+  .panel { padding: 14px 13px; }
+
+  .battle { gap: 7px; }
+  .battle__top { gap: 6px; padding-top: 4px; }
+  .combatant { padding: 8px 11px; }
+  .combatant__head strong { font-size: 16px; }
+  .combatant .label { font-size: 10px; }
+  .bar__track { height: 11px; }
+  .bar__label b { font-size: 15px; }
+  .battle__turn { min-width: 0; padding: 8px 10px; }
+  .battle__turn strong { font-size: 15px; }
+
+  /* the characters stay side by side — stacking them loses the confrontation */
+  .battle__stage { height: clamp(200px, 34vh, 300px); }
+  .battle__prop { display: none; }
+  .battle__actors { padding: 0 1% 48px; }
+
+  .intent-card { padding: 7px 9px; gap: 7px; }
+  .intent-card__icon { width: 30px; height: 30px; }
+  .intent-card__name { font-size: 14px; }
+  .intent-card__when { font-size: 9px; }
+  .fact { font-size: 11.5px; padding: 1px 5px; }
+  .fact--damage { font-size: 13px; }
+
+  .action-bar { grid-template-columns: repeat(2, 1fr); gap: 7px; }
+  .action { min-height: 84px; padding: 8px 9px 22px; }
+  .action strong { font-size: 13px; }
+  .action span { font-size: 10.5px; }
+  .action__icon { width: 26px; height: 26px; }
+
+  /* workshop: bench first, then the drawer, then the readout */
+  .workshop__grid {
+    grid-template-areas: 'bench' 'catalogue' 'readout' 'route';
+  }
+  .workshop__bench { min-height: 330px; }
+  .workshop__bench-inner { min-height: 300px; }
+  .workshop__prop { display: none; }
+  .part-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .part-card__art { width: 68px; height: 68px; }
+  .part-card strong { font-size: 13px; }
+  .part-card__desc { font-size: 11px; }
+  .slot-tabs { gap: 5px; }
+  .slot-tab span { font-size: 12.5px; }
+  .slot-tab em { font-size: 10px; }
+
+  .shop__grid { grid-template-columns: 1fr; }
+  .route-pick__grid { grid-template-columns: 1fr; }
+  .title__word { font-size: 34px; }
+  .title__card { padding: 20px 18px; }
+  .title__actions .btn { font-size: 15px; padding: 12px 18px; }
+
+  /* touch targets */
+  .btn { padding: 11px 15px; }
+  .part-card { padding: 10px 8px; }
+}
+
+/* very short landscape (phones held sideways) */
+@media (max-height: 480px) and (orientation: landscape) {
+  .battle__stage { height: clamp(160px, 40vh, 240px); }
+  .action { min-height: 74px; }
+  .battle__side { display: none; }
+}

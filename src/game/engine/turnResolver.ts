@@ -74,6 +74,14 @@ export function advancePhase(state: BattleState): boolean {
   state.enemy.intents = [];
   fillIntentQueue(state);
 
+  // The boss gets Block and Fury on the shift; without a matching breather the
+  // second phase always opened against a spent build and was near-unwinnable.
+  const relief = Math.round(state.player.maxHp * BALANCE.enemy.phaseShiftPlayerHeal);
+  if (relief > 0) {
+    state.player.hp = Math.min(state.player.maxHp, state.player.hp + relief);
+    addLog(state, 'Phase Shift', `숨을 고르며 HP ${relief}를 회복했다.`, 'repair');
+  }
+
   state.fx.push({ type: 'phase', index: state.enemy.phaseIndex, name: phase.name });
   addLog(state, 'Phase Shift', phase.intro, 'phase');
   return true;

@@ -155,8 +155,11 @@ export interface BuildModifiers {
   spd?: number;
   /** Subtracted from peel chance rolls. Higher = parts stay on. */
   peelResist?: number;
-  /** Every skill starts the battle with cooldown reduced by this. */
-  cooldownStart?: number;
+  /**
+   * Subtracted from every cooldown a skill sets, floored at 0. A discount of 1
+   * means a 3-turn skill comes back in 2.
+   */
+  cooldownDiscount?: number;
 }
 
 // ─── parts ───────────────────────────────────────────────────────────────────

@@ -166,9 +166,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
       go('result');
       return;
     }
-    // Damaged parts start the fight already peeled; the engine models that by
-    // peeling them immediately after creation so every downstream rule agrees.
-    let fresh = createBattle({
+    const fresh = createBattle({
       encounterId: encounter.id,
       assembly: run.assembly,
       relics: run.relics,
@@ -179,15 +177,8 @@ export function GameProvider({ children }: { children: ReactNode }) {
         startBlock: run.carry.startBlock,
         startStatuses: run.carry.startStatuses,
       },
+      damagedSlots: run.damagedSlots,
     });
-    for (const slot of run.damagedSlots) {
-      fresh = structuredClone(fresh);
-      const runtime = fresh.player.slots[slot];
-      if (runtime.partId && !runtime.peeled) {
-        runtime.peeled = true;
-        fresh.player.floor.push({ slot, partId: runtime.partId, key: `dmg-${slot}`, x: 0.2, rotation: -12 });
-      }
-    }
     setBattle(fresh);
     setSummary(null);
     go('battle');

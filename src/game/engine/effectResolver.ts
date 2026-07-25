@@ -6,6 +6,7 @@
  * resolver can serve both sides without duplicated arithmetic.
  */
 
+import { BALANCE } from '../data/balance';
 import type { Effect, EffectCondition, PassiveRule, StatusId } from '../data/types';
 import type { BattleSide, BattleState } from '../state/battleState';
 import { applyDamage, changeGlue, changeInk, gainBlock, heal, shredBlock } from './damageResolver';
@@ -52,13 +53,16 @@ export function applyEffects(state: BattleState, effects: readonly Effect[], ctx
   for (const effect of effects) {
     switch (effect.kind) {
       case 'damage': {
-        let amount = effect.amount + (ctx.bonusDamage ?? 0) - (ctx.weaken ?? 0);
+        let base = effect.amount;
         if (effect.bonus && evaluateCondition(state, ctx.source, effect.bonus.when)) {
-          amount += effect.bonus.amount;
+          base += effect.bonus.amount;
         }
-        amount = Math.max(0, amount);
+        // Fury and weakening adjust the intent as a whole, not each hit — a
+        // 2-hit move at Fury 3 used to gain +6 and outscale everything.
+        const first = Math.max(0, base + (ctx.bonusDamage ?? 0) - (ctx.weaken ?? 0));
         const hits = effect.hits ?? 1;
         for (let i = 0; i < hits; i++) {
+          const amount = i === 0 ? first : Math.max(0, base);
           if (state.outcome !== 'ongoing') break;
           applyDamage(state, {
             amount,
@@ -78,10 +82,11 @@ export function applyEffects(state: BattleState, effects: readonly Effect[], ctx
         gainBlock(state, ctx.source, effect.amount, ctx.label);
         break;
       case 'enemyBlock':
-        gainBlock(state, 'enemy', effect.amount, ctx.label);
+        // block for whoever is acting; named for how it reads on an intent card
+        gainBlock(state, ctx.source, effect.amount, ctx.label);
         break;
       case 'shredBlock':
-        shredBlock(state, 'player', effect.amount, ctx.label);
+        shredBlock(state, opponent, effect.amount, ctx.label);
         break;
       case 'heal':
         heal(state, effect.amount, ctx.label);
@@ -127,7 +132,7 @@ export function applyEffects(state: BattleState, effects: readonly Effect[], ctx
         break;
       }
       case 'fury':
-        state.enemy.fury += effect.amount;
+        state.enemy.fury = Math.min(BALANCE.enemy.maxFury, state.enemy.fury + effect.amount);
         addLog(state, ctx.label, `${state.enemy.name}의 Fury +${effect.amount}.`, 'enemy');
         break;
     }

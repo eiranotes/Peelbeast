@@ -19,6 +19,9 @@ const SEED = 20260725;
 const SIZES = [
   { name: '1440x900', width: 1440, height: 900 },
   { name: '1280x720', width: 1280, height: 720 },
+  // portrait phone, to check the dedicated mobile layout rather than a
+  // shrunken desktop one
+  { name: '390x844', width: 390, height: 844, mobile: true },
 ];
 
 // The container ships a Chromium build older than this Playwright version, so
@@ -51,7 +54,12 @@ const browser = await chromium.launch({ executablePath: EXECUTABLE });
 for (const size of SIZES) {
   const dir = path.join(OUT, size.name);
   await fs.mkdir(dir, { recursive: true });
-  const ctx = await browser.newContext({ viewport: { width: size.width, height: size.height } });
+  const ctx = await browser.newContext({
+    viewport: { width: size.width, height: size.height },
+    // hasTouch without isMobile: `isMobile` swaps in an emulated layout
+    // viewport that ignores the requested width, and we want the real one.
+    ...(size.mobile ? { hasTouch: true } : {}),
+  });
   const page = await ctx.newPage();
   const errors = [];
   page.on('pageerror', (e) => errors.push(String(e)));
@@ -75,13 +83,20 @@ for (const size of SIZES) {
   await page.getByTestId('part-part.core.coffee_cup').hover();
   await shoot(page, dir, '04-workshop-part-preview');
 
-  // a build with no peel resistance, so the peel shot is reliable
-  await page.getByTestId('slot-tab-hand').click();
-  await page.getByTestId('part-part.hand.umbrella_hook').click();
-  await page.getByTestId('slot-tab-core').click();
-  await page.getByTestId('part-part.core.coffee_cup').click();
-  await page.getByTestId('slot-tab-trinket').click();
-  await page.getByTestId('part-part.trinket.bread_patch').click();
+  // A build with no peel resistance, so the peel shot is reliable. On a touch
+  // viewport the first tap previews and the second commits.
+  const taps = size.mobile ? 2 : 1;
+  for (const [tab, part] of [
+    ['slot-tab-hand', 'part-part.hand.umbrella_hook'],
+    ['slot-tab-core', 'part-part.core.coffee_cup'],
+    ['slot-tab-trinket', 'part-part.trinket.bread_patch'],
+  ]) {
+    await page.getByTestId(tab).click();
+    for (let t = 0; t < taps; t++) {
+      await page.getByTestId(part).click();
+      await page.waitForTimeout(120);
+    }
+  }
 
   await page.getByTestId('enter-node').click();
   await page.waitForSelector('[data-testid="battle-screen"]');

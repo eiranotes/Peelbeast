@@ -225,9 +225,14 @@ test.describe('PEELBEAST vertical slice', () => {
     await repair.click();
     await page.waitForTimeout(700);
 
+    // The claim under test is that THIS slot came back. The floor as a whole is
+    // not asserted: Repair ends the turn, so the enemy may peel something else
+    // before these assertions run.
     await expect(page.getByTestId(`peel-${slotKey}`)).not.toContainText('PEELED');
     await expect(page.getByTestId('peelbeast-figure').first().locator(`.figure__part--${slotKey}`)).toHaveCount(1);
-    await expect(page.getByTestId('floor-parts').locator('.floor-part')).toHaveCount(0);
+    await expect(
+      page.getByTestId('floor-parts').locator('.floor-part', { hasText: new RegExp(slotKey!, 'i') }),
+    ).toHaveCount(0);
   });
 
   test('9. clearing a fight leads to a reward screen and then the next node', async ({ page }) => {
