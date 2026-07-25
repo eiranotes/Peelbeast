@@ -33,7 +33,13 @@ jobs:
       - name: Resolve Chromium path
         shell: bash
         run: |
-          echo "PLAYWRIGHT_CHROMIUM_PATH=$(node -e \"import('@playwright/test').then(m=>console.log(m.chromium.executablePath()))\")" >> "$GITHUB_ENV"
+          set -euo pipefail
+          CHROME="$(find "$HOME/.cache/ms-playwright" -type f \( -name chrome -o -name headless_shell \) -perm -111 | head -n 1)"
+          test -n "$CHROME"
+          echo "PLAYWRIGHT_CHROMIUM_PATH=$CHROME" >> "$GITHUB_ENV"
+          sudo mkdir -p /opt/pw-browsers
+          sudo ln -sf "$CHROME" /opt/pw-browsers/chromium
+          "$CHROME" --version
 
       - name: Typecheck
         run: npm run typecheck
