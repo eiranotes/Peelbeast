@@ -2,8 +2,16 @@
 
 Asset-driven turn-based roguelike vertical-slice prototype.
 
-## Current version
+## Run
+Open `index.html` in a browser or use GitHub Pages.
 
-v0.8 includes combat, events, shop, elite encounter, boss phases, part assembly, peel/reattach mechanics, run resources, and development documents.
+## v0.8
+- Part assembly with visual layers
+- Turn-based combat and enemy intent queue
+- Peel / reattach mechanics
+- Combat, event, shop, elite, and boss nodes
+- Scrap economy and run carry-over
+- Full development documents under `docs/`
 
-Open `index.html` to run the browser prototype.
+## Repository build
+The browser build uses a chunked optimized WebP atlas payload under `assets/atlas_chunks/` to keep the repository compact while retaining the image-driven presentation.
